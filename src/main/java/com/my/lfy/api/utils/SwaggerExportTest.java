@@ -37,7 +37,7 @@ public class SwaggerExportTest {
         Swagger2MarkupConverter.from(new URL("http://192.168.1.15:60102/sync/v2/api-docs"))
                 .withConfig(config)
                 .build()
-                .toFile(Paths.get("./docs/markdown/generated/all"));
+                .toFile(Paths.get("/home/lfy/HDD/worksummmary"));
     }
 
 }

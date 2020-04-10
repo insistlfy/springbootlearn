@@ -6,14 +6,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * ActionAspect
+ * LfyApplication
  *
  * @author Lifuyuan
  * @date 20-1-9
+ * 描述 :
+ * RefreshScope //自动刷新配置
  **/
 @Slf4j
+@RefreshScope
 @EnableCaching
 @ServletComponentScan
 @SpringBootApplication

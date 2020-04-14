@@ -3,10 +3,9 @@ package com.my.lfy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.retry.annotation.EnableRetry;
 
 /**
  * LfyApplication
@@ -17,8 +16,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * RefreshScope //自动刷新配置
  **/
 @Slf4j
-@RefreshScope
+//@RefreshScope
 @EnableCaching
+@EnableRetry
 @ServletComponentScan
 @SpringBootApplication
 public class LfyApplication {

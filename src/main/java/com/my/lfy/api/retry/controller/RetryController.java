@@ -1,6 +1,6 @@
-package com.my.lfy.api.controller;
+package com.my.lfy.api.retry.controller;
 
-import com.my.lfy.api.service.RetryService;
+import com.my.lfy.api.retry.service.RetryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

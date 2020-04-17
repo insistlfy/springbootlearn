@@ -7,6 +7,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * Task
+ * 没有配置自己的线程池时，会默认使用SimpleAsyncTaskExecutor
+ * 如果项目中只配置了一个线程池，那么不需要显示指定使用这个线程池，
+ * spring也会自动使用用户配置的线程池，但是如果配置了多个就必须要显示指定，否则还是会使用默认的
+ * 如果想要指定使用哪个线程池，可以使用@Async("executor2")显示指定
  *
  * @author lfy
  * @date 2020/4/16

@@ -62,7 +62,7 @@ public class SyncStringUtils extends StringUtils {
      * @return boolean
      */
     public static boolean startWithChar(String str) {
-        if (SyncStringUtils.isNoneBlank(str)) {
+        if (SyncStringUtils.isNotBlank(str)) {
             String startChar = str.trim().substring(0, 1);
             return pattern.matcher(startChar).matches();
         }

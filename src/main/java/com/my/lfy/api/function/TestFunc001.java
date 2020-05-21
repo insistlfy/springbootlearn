@@ -59,7 +59,14 @@ public class TestFunc001 {
         System.out.println(animal1);
         System.out.println("========================⑤===============================");
 
-
+        People people3 = functionMethod(person, p -> {
+            People people2 = constructor(People::new);
+            people2.setName(p.getName());
+            people2.setSex(p.getSex());
+            return people2;
+        });
+        System.out.println(people3);
+        System.out.println("========================⑥===============================");
     }
 
 
@@ -74,6 +81,16 @@ public class TestFunc001 {
         return function.apply(str);
     }
 
+    /**
+     * Function 函数是接口,有参数,有返回值
+     *
+     * @param t        T
+     * @param function Function
+     * @return R
+     */
+    public static <T, R> R functionMethod(T t, Function<T, R> function) {
+        return function.apply(t);
+    }
 
     /**
      * BiFunction 函数是接口,有参数,有返回值

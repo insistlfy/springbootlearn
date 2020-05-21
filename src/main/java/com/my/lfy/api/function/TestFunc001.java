@@ -21,8 +21,12 @@ public class TestFunc001 {
 
     public static void main(String[] args) {
 
-        System.out.println(strHandler("  afsdasd", String::trim));
+        System.out.println(strHandler("  java", String::trim));
         System.out.println(strHandler("...Learn Java", str -> str.substring(3)));
+
+        System.out.println(functionMethod("  java", String::trim));
+        String s1 = functionMethod("###Hello Function...", s -> s.substring(3));
+        System.out.println(s1);
         System.out.println("========================①===============================");
 
         Person person = new Person("James", "M");

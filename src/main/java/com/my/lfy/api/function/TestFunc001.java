@@ -5,13 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * TestFunc001
@@ -36,7 +34,10 @@ public class TestFunc001 {
         System.out.println("========================②===============================");
 
         People people = new People();
-        biConsumerMethod(person, people, BeanUtils::copyProperties);
+        biConsumerMethod(person, people, (person12, people12) -> {
+            BeanUtils.copyProperties(person12, people12);
+            people12.setWeight("100");
+        });
         System.out.println(people);
         System.out.println("========================③===============================");
 
@@ -47,6 +48,16 @@ public class TestFunc001 {
         System.out.println(person1);
         System.out.println(people1);
         System.out.println("========================④===============================");
+
+        Animal animal1 = biFunctionMethod(person, people, (p1, p2) -> {
+            Animal animal = constructor(Animal::new);
+            animal.setName(p1.getName());
+            animal.setSex(p1.getSex());
+            animal.setWeight(p2.getWeight());
+            return animal;
+        });
+        System.out.println(animal1);
+        System.out.println("========================⑤===============================");
 
 
     }
@@ -63,6 +74,21 @@ public class TestFunc001 {
         return function.apply(str);
     }
 
+
+    /**
+     * BiFunction 函数是接口,有参数,有返回值
+     *
+     * @param t          T
+     * @param u          U
+     * @param biFunction BiFunction
+     * @param <T>        T
+     * @param <U>        U
+     * @param <R>        R
+     * @return R
+     */
+    public static <T, U, R> R biFunctionMethod(T t, U u, BiFunction<T, U, R> biFunction) {
+        return biFunction.apply(t, u);
+    }
 
     /**
      * Consumer 消费型接口,有参数,无返回值
@@ -125,4 +151,24 @@ class People implements Serializable {
 
     @ApiModelProperty(value = "性别")
     private String sex;
+
+    @ApiModelProperty(value = "体重")
+    private String weight;
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ApiModel
+class Animal implements Serializable {
+    private static final long serialVersionUID = 4747119184867951770L;
+
+    @ApiModelProperty(value = "姓名")
+    private String name;
+
+    @ApiModelProperty(value = "性别")
+    private String sex;
+
+    @ApiModelProperty(value = "体重")
+    private String weight;
 }

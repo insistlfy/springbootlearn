@@ -30,9 +30,9 @@ public class TreadPoolConfig {
 
 
     @Bean
-    public ExecutorService cardBindThreadPool() {
+    public ExecutorService myThreadPool() {
         //线程工场
-        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("card-bind-thread-%d").build();
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("MY-THREAD-%d").build();
 
         //线程池创建并返回
         return new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALINE_TIME, TimeUnit.SECONDS,

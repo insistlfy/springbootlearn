@@ -28,8 +28,8 @@ public class TransactionConfig {
 
     private static final int TX_METHOD_TIMEOUT = 300;
 
-    private static final String AOP_POINTCUT_EXPRESSION = "execution (* cn.swifthealth..api..service..*Service.*(..))" +
-            " and @target(org.springframework.stereotype.Service)";
+    private static final String AOP_POINTCUT_EXPRESSION = "execution (* com.my.lfy.api..service..*Service.*(..))"
+            + " and @target(org.springframework.stereotype.Service)";
 
     @Autowired
     private DataSourceTransactionManager transactionManager;

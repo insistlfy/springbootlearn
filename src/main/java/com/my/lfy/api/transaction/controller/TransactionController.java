@@ -32,9 +32,8 @@ public class TransactionController {
     private TransactionServiceImpl transactionService;
 
     @PostMapping("test001")
-    public JsonResult test001(@RequestParam("patId") @NotNull(message = "患者id不能为空") Long patId,
-                              @RequestParam("address") @NotBlank(message = "地址不能为空") String address) {
-        transactionService.test001(patId, address);
+    public JsonResult test001() {
+        transactionService.test001();
         return new JsonResult<>();
     }
 

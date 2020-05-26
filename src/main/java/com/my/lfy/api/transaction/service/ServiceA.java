@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
  **/
 @Slf4j
 @Service
-public class TransactionServiceImpl {
+public class ServiceA {
 
     @Autowired
     private PgCommonMapper pgCommonMapper;
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    @Autowired
+    private ServiceB serviceB;
+
+    @Transactional(propagation = Propagation.REQUIRED)
     public void testReadonly() {
 
         log.info("STEP1==============> 开始第一次查询..........");
@@ -36,7 +39,12 @@ public class TransactionServiceImpl {
         String paraValue = pgCommonMapper.queryParaValue("HIS_URL");
         log.info("paraValue===============>{}.", paraValue);
 
-//        update01();
+        update01();
+
+        funcD();
+
+        int i = 1 / 0;
+
     }
 
     @Transactional(readOnly = true)
@@ -89,8 +97,7 @@ public class TransactionServiceImpl {
         log.info("funcA==============> 执行完成..........");
     }
 
-    @Transactional
-    void funcB() {
+    private void funcB() {
         try {
             log.info("funcB==============> 开始执行..........");
             pgCommonMapper.updateAddressById("funcB", 100019606L);
@@ -100,13 +107,39 @@ public class TransactionServiceImpl {
         }
     }
 
-    @Transactional
-    void funcC() {
+    private void funcC() {
         log.info("funcC==============> 开始执行..........");
         if (null == pgCommonMapper.queryNameById(0L)) {
             throw new ServiceException("未查询到信息,无需更新");
         }
         pgCommonMapper.updateAddressById("funcC", 100019606L);
         log.info("funcB==============> 执行完成..........");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    void funcD() {
+        log.info("funcD==============>..........");
+        pgCommonMapper.updateAddressById("funcD", 100019606L);
+        log.info("funcD===============>.");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void testPropagation() {
+        log.info("serviceA==============> 开始第一次查询..........");
+        String first = pgCommonMapper.queryNameById(100019466L);
+        log.info("serviceAFirst===============>{}.", first);
+
+        log.info("serviceB============>methodB1====>开始");
+        serviceB.methodB1();
+
+        log.info("serviceB============>methodB2====>开始");
+        serviceB.methodB2();
+
+        log.info("serviceB============>methodB3====>开始");
+        serviceB.methodB3();
+
+        log.info("serviceB============>methodB4====>开始");
+        serviceB.methodB4();
+
     }
 }

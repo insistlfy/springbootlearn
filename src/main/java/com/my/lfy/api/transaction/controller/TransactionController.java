@@ -1,6 +1,6 @@
 package com.my.lfy.api.transaction.controller;
 
-import com.my.lfy.api.transaction.service.TransactionServiceImpl;
+import com.my.lfy.api.transaction.service.ServiceA;
 import com.my.lfy.utils.JsonResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * TransactionController
@@ -29,7 +27,7 @@ import javax.validation.constraints.NotNull;
 public class TransactionController {
 
     @Autowired
-    private TransactionServiceImpl transactionService;
+    private ServiceA transactionService;
 
     @PostMapping("testReadonly")
     public JsonResult testReadonly() {
@@ -52,6 +50,12 @@ public class TransactionController {
     @PostMapping("test004--模拟线上案例")
     public JsonResult checkUnfreezeCharge() {
         transactionService.checkUnfreezeCharge();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("test005--事务传播")
+    public JsonResult testPropagation() {
+        transactionService.testPropagation();
         return new JsonResult<>();
     }
 }

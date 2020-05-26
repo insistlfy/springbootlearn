@@ -13,6 +13,9 @@
         where id = #{patId}
         limit 1
     </select>
+    <select id="queryParaValue" resultType="java.lang.String">
+        select para_value from sys_param_value where para_code = #{paraCode}
+    </select>
 
 
 </mapper>

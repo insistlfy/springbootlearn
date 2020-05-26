@@ -21,6 +21,14 @@ public interface PgCommonMapper {
     String queryNameById(@Param("patId") Long patId);
 
     /**
+     * 查询系统参数值
+     *
+     * @param paraCode
+     * @return String
+     */
+    String queryParaValue(@Param("paraCode") String paraCode);
+
+    /**
      * 根据患者id更新患者地址
      *
      * @param address String

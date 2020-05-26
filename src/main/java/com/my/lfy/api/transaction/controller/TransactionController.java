@@ -31,14 +31,27 @@ public class TransactionController {
     @Autowired
     private TransactionServiceImpl transactionService;
 
-    @PostMapping("test001")
-    public JsonResult test001() {
-        transactionService.test001();
+    @PostMapping("testReadonly")
+    public JsonResult testReadonly() {
+        transactionService.testReadonly();
         return new JsonResult<>();
     }
 
     @PostMapping("test002")
     public JsonResult test002(@RequestParam(value = "name", required = false) @NotBlank(message = "姓名不能为空") String name) {
-        return new JsonResult<>(name);
+        transactionService.test002();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("test003")
+    public JsonResult test003() {
+        transactionService.test003();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("test004--模拟线上案例")
+    public JsonResult checkUnfreezeCharge() {
+        transactionService.checkUnfreezeCharge();
+        return new JsonResult<>();
     }
 }

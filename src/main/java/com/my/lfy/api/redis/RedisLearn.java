@@ -1,5 +1,6 @@
 package com.my.lfy.api.redis;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -12,6 +13,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * RedisLearn
@@ -23,6 +27,10 @@ import java.util.Map;
 public class RedisLearn {
 
     public static void main(String[] args) {
+
+        //线程池
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 50, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>()
+                , new ThreadFactoryBuilder().setNameFormat("REDIS--%d").build());
 
         // Test Connect
         JedisPool pool = new JedisPool();
@@ -40,9 +48,7 @@ public class RedisLearn {
         jedis.lpush("list", "Hello");
         jedis.lpush("list", "Redis");
         List<String> redisList = jedis.lrange("list", 0, 1);
-        redisList.forEach(e -> {
-            log.info("redis <---> List ---->{}.", e);
-        });
+        redisList.forEach(e -> log.info("redis <---> List ---->{}.", e));
         System.out.println();
 
         //Test Set
@@ -77,12 +83,10 @@ public class RedisLearn {
 
         //Test PUBLISH SUBSCRIBE
         //订阅者
-        Thread subscriber = new Thread(new SubChannel(pool));
-        subscriber.start();
+        executor.execute(new SubChannel(pool));
 
         //发布者
-        Thread publisher = new Thread(new Publisher(pool));
-        publisher.start();
+        executor.execute(new Publisher(pool));
     }
 }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @date 2020/5/25
  **/
 @Repository
-public interface PgCommonMapper {
+public interface CommonMapper {
 
     /**
      * 通过身份证号查询姓名

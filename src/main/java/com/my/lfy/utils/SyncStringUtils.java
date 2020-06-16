@@ -68,4 +68,13 @@ public class SyncStringUtils extends StringUtils {
         }
         return false;
     }
+
+
+    public static void main(String[] args) {
+        String str = "123456";
+
+        System.out.println(str.indexOf("1"));
+        System.out.println(str.endsWith("123456"));
+        System.out.println(str.substring(1));
+    }
 }

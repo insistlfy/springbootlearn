@@ -24,7 +24,7 @@ public class ServiceA {
     @Autowired
     private ServiceB serviceB;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+//    @Transactional(propagation = Propagation.REQUIRED)
     public void testReadonly() {
 
         log.info("STEP1==============> 开始第一次查询..........");

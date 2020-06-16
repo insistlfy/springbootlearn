@@ -24,7 +24,7 @@ public class ServiceA {
     @Autowired
     private ServiceB serviceB;
 
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     public void testReadonly() {
 
         log.info("STEP1==============> 开始第一次查询..........");

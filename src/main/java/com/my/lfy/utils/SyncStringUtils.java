@@ -2,6 +2,7 @@ package com.my.lfy.utils;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.PatternMatchUtils;
 
 import java.util.regex.Pattern;
 
@@ -76,5 +77,13 @@ public class SyncStringUtils extends StringUtils {
         System.out.println(str.indexOf("1"));
         System.out.println(str.endsWith("123456"));
         System.out.println(str.substring(1));
+        System.out.println();
+
+        String str1 = "**";
+        System.out.println(str1.indexOf("*",1));
+        System.out.println(str1.substring(1));
+
+
+        System.out.println(PatternMatchUtils.simpleMatch("*test*","testA"));
     }
 }

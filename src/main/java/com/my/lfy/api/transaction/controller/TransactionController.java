@@ -1,6 +1,7 @@
 package com.my.lfy.api.transaction.controller;
 
 import com.my.lfy.api.transaction.service.ServiceA;
+import com.my.lfy.api.transaction.service.TransactionInterfaceService;
 import com.my.lfy.utils.JsonResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class TransactionController {
     @Autowired
     private ServiceA transactionService;
 
+    @Autowired
+    private TransactionInterfaceService transactionInterfaceService;
+
     @PostMapping("testReadonly")
     public JsonResult testReadonly() {
         transactionService.testReadonly();
@@ -56,6 +60,12 @@ public class TransactionController {
     @PostMapping("test005--事务传播")
     public JsonResult testPropagation() {
         transactionService.testPropagation();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("test006")
+    public JsonResult testInterface() {
+        transactionInterfaceService.testInterface();
         return new JsonResult<>();
     }
 }

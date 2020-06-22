@@ -14,6 +14,7 @@ public class Dichotomy {
 
         int[] arr = {1, 2, 3, 4, 5};
         System.out.println(dichotomy(arr, 4));
+        dichotomyNew(arr,2);
     }
 
     public static int dichotomy(int[] array, int value) {
@@ -40,5 +41,34 @@ public class Dichotomy {
             }
         }
         return mid;
+    }
+
+    public static int dichotomyNew(int[] array, int value) {
+
+        //标识是否找到目标数据
+        int flag = -1;
+
+        //初始化最大最小索引
+        int min = 0;
+        int max = array.length - 1;
+
+        while (-1 == flag && min <= max) {
+            int mid = (min + max) / 2;
+
+            if (array[min] == value) {
+                flag = mid;
+                System.out.println("查找成功,目标数据索引为 : " + flag);
+            } else if (array[mid] > value) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+
+        //flag值未改变,则表示未查询到
+        if (-1 == flag) {
+            System.out.println("查找失败,目标数据不在该数组中.");
+        }
+        return flag;
     }
 }

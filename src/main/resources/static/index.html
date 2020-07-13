@@ -8,20 +8,21 @@
 <body>
 <h3>hello socket</h3>
 <p>【userId】：
-<div><input id="userId" name="userId" type="text" value="10"></div>
+<div><label for="userId"></label><input id="userId" name="userId" type="text" value="10"></div>
 <p>【toUserId】：
-<div><input id="toUserId" name="toUserId" type="text" value="20"></div>
-<p>【toUserId】：
-<div><input id="contentText" name="contentText" type="text" value="hello websocket"></div>
+<div><label for="toUserId"></label><input id="toUserId" name="toUserId" type="text" value="20"></div>
+<p>【contentText】：
+<div><label for="contentText"></label><input id="contentText" name="contentText" type="text" value="hello websocket">
+</div>
 <p>操作:
-<div><a onclick="openSocket()">开启socket</a></div>
+<div><a href="javascript:;" onclick="openSocket()">开启socket</a></div>
 <p>【操作】：
-<div><a onclick="sendMessage()">发送消息</a></div>
+<div><a href="javascript:;" onclick="sendMessage()">发送消息</a></div>
 </body>
 <script>
 
 
-    var socket;
+    let socket;
 
     function openSocket() {
         if (typeof (WebSocket) == "undefined") {
@@ -29,9 +30,8 @@
         } else {
             console.log("您的浏览器支持WebSocket");
             //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-            var userId = document.getElementById('userId').value;
-            // var socketUrl="ws://127.0.0.1:22599/webSocket/"+userId;
-            var socketUrl = "ws://192.168.10.84:8888/lfy/webSocket/" + userId;
+            const userId = document.getElementById('userId').value;
+            const socketUrl = "ws://192.168.10.84:8888/lfy/webSocket/" + userId;
             console.log(socketUrl);
             if (socket != null) {
                 socket.close();
@@ -65,9 +65,9 @@
             console.log("您的浏览器不支持WebSocket");
         } else {
             // console.log("您的浏览器支持WebSocket");
-            var toUserId = document.getElementById('toUserId').value;
-            var contentText = document.getElementById('contentText').value;
-            var msg = '{"toUserId":"' + toUserId + '","contentText":"' + contentText + '"}';
+            const toUserId = document.getElementById('toUserId').value;
+            const contentText = document.getElementById('contentText').value;
+            const msg = '{"toUserId":"' + toUserId + '","contentText":"' + contentText + '"}';
             console.log(msg);
             socket.send(msg);
         }

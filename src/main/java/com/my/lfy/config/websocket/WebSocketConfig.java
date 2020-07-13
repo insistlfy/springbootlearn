@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
- * WebSocketConfig
+ * 开启webSocket支持
  *
  * @author lfy
  * @date 2020/6/24
@@ -15,6 +15,7 @@ public class WebSocketConfig {
 
     /**
      * 这个Bean会自动注册使用@ServerEndpoint注解声明的websocket endpoint
+     * 检测所有带有@serverEndpoint注解的bean并注册他们。
      *
      * @return ServerEndpointExporter
      */

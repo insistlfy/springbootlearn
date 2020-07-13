@@ -1,5 +1,6 @@
 package com.my.lfy.config.websocket;
 
+import com.my.lfy.utils.WebSocketUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +9,8 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.my.lfy.utils.WebSocketUtils.*;
 
 /**
  * 因为WebSocket是类似客户端服务端的形式(采用ws协议)，那么这里的WebSocketServer其实就相当于一个ws协议的Controller
@@ -24,15 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class WebSocketServer {
 
-    /**
-     * 静态变量,用来记录当前在线连接数.(线程安全)
-     */
-    private static AtomicInteger ONLINE_NUM = new AtomicInteger();
-
-    /**
-     * 存放每个客户端对应的WebSocketServer对象
-     */
-    private static ConcurrentHashMap<String, Session> SESSION_POOL = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void init() {
@@ -44,80 +35,32 @@ public class WebSocketServer {
         log.info("建立连接成功...");
         SESSION_POOL.put(userName, session);
         //在线人数加1
-        addOnlineCount();
+        WebSocketUtils.addOnlineCount();
         log.info("{}加入webSocket!当前人数为:{}.", userName, ONLINE_NUM);
-        try {
-            sendMessage(session, "欢迎" + userName + "加入连接!");
-        } catch (IOException e) {
-            log.error("onOpen===>sendMessage======>", e);
-        }
+        log.info("欢迎用户[{}]来到聊天室...", userName);
+        sendMessageAll("欢迎用户[" + userName + "] 来到聊天室！");
     }
 
     @OnClose
     public void onClose(@PathParam(value = "sid") String userName) {
         SESSION_POOL.remove(userName);
-        subOnlineCount();
+        WebSocketUtils.subOnlineCount();
         log.info("{}断开webSocket连接!当前人数为;{}.", userName, ONLINE_NUM);
+        sendMessageAll("用户[" + userName + "] 离开聊天室了！");
     }
 
 
     @OnMessage
-    public void onMessage(String message) {
+    public void onMessage(@PathParam(value = "sid") String userName, String message) {
         message = "客户端" + message + ",已收到";
         log.info("message={}.", message);
-        for (Map.Entry<String, Session> entry : SESSION_POOL.entrySet()) {
-            try {
-                sendMessage(entry.getValue(), message);
-            } catch (IOException e) {
-                log.error("onMessage===>sendMessage==+>", e);
-            }
-        }
+        sendMessageAll("用户[" + userName + "] : " + message);
     }
 
     @OnError
-    public void onError(Session session, Throwable throwable) {
+    public void onError(Session session, Throwable throwable) throws IOException {
         log.error("发生错误...");
+        session.close();
         log.error("[ERROR]=========>", throwable);
-    }
-
-
-    /**
-     * 发送消息
-     *
-     * @param session Session
-     * @param message String
-     * @throws IOException e
-     */
-    public static void sendMessage(Session session, String message) throws IOException {
-        if (null != session) {
-            synchronized (session) {
-                log.info("发送数据====>[{}].", message);
-                session.getBasicRemote().sendText(message);
-            }
-        }
-    }
-
-    /**
-     * 给指定用户发送消息
-     *
-     * @param userName String
-     * @param message  String
-     */
-    public static void sendInfo(String userName, String message) {
-        Session session = SESSION_POOL.get(userName);
-        try {
-            sendMessage(session, message);
-        } catch (IOException e) {
-            log.error("发送数据失败");
-            log.error("发送数据失败======>", e);
-        }
-    }
-
-    private static void addOnlineCount() {
-        ONLINE_NUM.incrementAndGet();
-    }
-
-    private static void subOnlineCount() {
-        ONLINE_NUM.decrementAndGet();
     }
 }

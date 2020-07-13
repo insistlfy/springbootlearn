@@ -1,12 +1,11 @@
 package com.my.lfy.api.websocket.controller;
 
-import com.my.lfy.config.websocket.WebSocketServer;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import static com.my.lfy.utils.WebSocketUtils.SESSION_POOL;
+import static com.my.lfy.utils.WebSocketUtils.sendMessage;
 
 /**
  * WebsocketController
@@ -20,20 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "【WEBSOCKET-TEST】")
 public class WebsocketController {
 
-//    @GetMapping("/sendAll")
-//    public String sendAllMessage(@RequestParam("message") String message) {
-//        try {
-//            WebSocketServer.sendMessage(,message);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "ok";
-//    }
+    @GetMapping("{sender}/to/{receiver}")
+    public void sendOneMessage(@PathVariable("sender") String sender,
+                               @PathVariable("receiver") String receiver,
+                               @RequestParam("message") String message) {
+        sendMessage(SESSION_POOL.get(receiver), "[" + sender + "]" + "-> [" + receiver + "] : " + message);
 
-    @GetMapping("/sendOne")
-    public String sendOneMessage(@RequestParam("message") String message,
-                                 @RequestParam("username") String username) {
-        WebSocketServer.sendInfo(username, message);
-        return "ok";
     }
 }

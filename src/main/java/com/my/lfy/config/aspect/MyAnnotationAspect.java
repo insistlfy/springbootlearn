@@ -21,13 +21,13 @@ import org.springframework.stereotype.Component;
 public class MyAnnotationAspect {
 
     @Around(value = "@annotation(around)")
-    public void process(ProceedingJoinPoint point, MyAnnotation around) throws Throwable {
+    public Object process(ProceedingJoinPoint point, MyAnnotation around) throws Throwable {
 
         Object[] args = point.getArgs();
         BaseInfo baseInfo = (BaseInfo) args[1];
         baseInfo.setOperCode(around.value());
 
         log.info("MyAnnotation===> args = [{}].", JSON.toJSONString(args));
-        point.proceed();
+        return point.proceed();
     }
 }

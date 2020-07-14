@@ -14,6 +14,8 @@ import java.io.Serializable;
  **/
 @Slf4j
 public class JsonResult<T> implements Serializable {
+
+    private static final long serialVersionUID = -7449507532584574484L;
     /**
      * 数据
      */

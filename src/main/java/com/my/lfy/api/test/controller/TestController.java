@@ -1,11 +1,12 @@
 package com.my.lfy.api.test.controller;
 
 import com.my.lfy.api.test.service.AbstractService;
+import com.my.lfy.api.test.service.Aservice;
 import com.my.lfy.utils.JsonResult;
+import com.my.lfy.utils.SpringContextUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,6 @@ public class TestController {
     @ApiOperation(value = "test-01")
     public JsonResult test() {
         context.get("aservice").print();
-        return new JsonResult();
+        return new JsonResult<>();
     }
 }

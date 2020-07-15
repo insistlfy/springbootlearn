@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author lfy
  * @date 2020/7/13
  **/
-@Component
+@Component("B")
 public class Bservice extends AbstractService {
     @Override
     public void print() {

@@ -1,6 +1,7 @@
 package com.my.lfy.api.annotation.service;
 
 import com.my.lfy.api.annotation.model.BaseInfo;
+import com.my.lfy.api.annotation.model.ResultVo;
 import com.my.lfy.config.annotation.MyAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,16 @@ import org.springframework.stereotype.Service;
 public class AnnotationService {
 
     @MyAnnotation
-    public String test01(String sid, BaseInfo baseInfo) {
+    public ResultVo test01(String sid, BaseInfo baseInfo) {
+
+        ResultVo resultVo = ResultVo.builder()
+                .name("James")
+                .sex("男")
+                .weight("60")
+                .operCode(baseInfo.getOperCode())
+                .build();
         String operCode = baseInfo.getOperCode();
         log.info("operCode====>{}.", operCode);
-        return operCode;
+        return resultVo;
     }
 }

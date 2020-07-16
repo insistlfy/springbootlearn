@@ -1,16 +1,14 @@
 package com.my.lfy.api.test.controller;
 
-import com.my.lfy.api.test.service.AbstractService;
+import com.my.lfy.api.test.service.MyFactory;
 import com.my.lfy.utils.JsonResult;
+import com.my.lfy.utils.MyEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * TestController
@@ -20,16 +18,16 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 @RestController
 @RequestMapping("v1/test")
-@Api(tags = "【TEST】")
+@Api(tags = "【TEST-STRATEGY】")
 public class TestController {
 
     @Autowired
-    private final Map<String, AbstractService> context = new ConcurrentHashMap<>();
+    private MyFactory myFactory;
 
     @PostMapping()
     @ApiOperation(value = "test-01")
     public JsonResult test() {
-        context.get("A").print();
+        myFactory.get(MyEnum.TEST.getTest("A")).print();
         return new JsonResult<>();
     }
 }

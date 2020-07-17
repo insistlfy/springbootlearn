@@ -14,7 +14,31 @@
         limit 1
     </select>
     <select id="queryParaValue" resultType="java.lang.String">
-        select para_value from sys_param_value where para_code = #{paraCode}
+        select para_value
+        from sys_param_value
+        where para_code = #{paraCode}
+    </select>
+    <select id="queryList" resultType="java.lang.String">
+        select para_value from sys_param_value
+        <where>
+            <if test='params != null and params.size() > 0'>
+                para_code in
+                <foreach collection="params" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="queryListModel" resultType="java.lang.String">
+        select para_value from sys_param_value
+        <where>
+            <if test='model.getCode() != null and model.getCode().size() > 0'>
+                para_code in
+                <foreach collection="params" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
     </select>
 
 

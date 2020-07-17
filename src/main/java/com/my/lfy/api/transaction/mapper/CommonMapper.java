@@ -1,7 +1,10 @@
 package com.my.lfy.api.transaction.mapper;
 
+import com.my.lfy.api.test.model.TestModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * PgCommonMapper
@@ -36,4 +39,20 @@ public interface CommonMapper {
      */
     void updateAddressById(@Param("address") String address,
                            @Param("patId") Long patId);
+
+    /**
+     * 测试MyBatis之List
+     *
+     * @param params List
+     * @return List
+     */
+    List<String> queryList(@Param("params") List<String> params);
+
+    /**
+     * 测试MyBatis之List-model
+     *
+     * @param model TestModel
+     * @return List
+     */
+    List<String> queryListModel(@Param("model") TestModel model);
 }

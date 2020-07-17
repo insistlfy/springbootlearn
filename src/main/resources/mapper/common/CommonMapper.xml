@@ -34,7 +34,7 @@
         <where>
             <if test='model.getCode() != null and model.getCode().size() > 0'>
                 para_code in
-                <foreach collection="params" index="index" item="item" open="(" separator="," close=")">
+                <foreach collection="model.getCode()" index="index" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>

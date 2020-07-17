@@ -54,7 +54,9 @@ public class TestController {
     public JsonResult test03() {
 
         TestModel model = new TestModel();
-//        model.setCode(new ArrayList<>());
+        List<String> tempList = new ArrayList<>();
+//        tempList.add("REG_DIRECT_CHARGE");
+        model.setCode(tempList);
         return new JsonResult<>(commonMapper.queryListModel(model));
     }
 }

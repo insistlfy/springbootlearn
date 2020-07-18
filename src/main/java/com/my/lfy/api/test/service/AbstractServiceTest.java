@@ -16,7 +16,7 @@ public abstract class AbstractServiceTest {
     @PostConstruct
     public void init() {
         if (!"lfy".equals(getOperCode())) {
-            log.info("init failed..");
+            log.info("init failed...");
             return;
         }
         log.info("init successful...");

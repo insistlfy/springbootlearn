@@ -8,7 +8,7 @@ package com.my.lfy.api.design.abstractfactory;
  **/
 public class SmsFactory implements Provider {
     @Override
-    public IsendMsg create() {
+    public ISendMsg create() {
         return new SmsSendMsg();
     }
 }

@@ -8,5 +8,5 @@ package com.my.lfy.api.design.abstractfactory;
  **/
 public interface Provider {
 
-    IsendMsg create();
+    ISendMsg create();
 }

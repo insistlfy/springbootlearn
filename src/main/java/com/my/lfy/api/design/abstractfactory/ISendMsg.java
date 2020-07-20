@@ -1,12 +1,12 @@
 package com.my.lfy.api.design.abstractfactory;
 
 /**
- * IsendMsg
+ * ISendMsg
  *
  * @author lfy
  * @date 2020/7/20
  **/
-public interface IsendMsg {
+public interface ISendMsg {
 
     void sendMsg();
 }

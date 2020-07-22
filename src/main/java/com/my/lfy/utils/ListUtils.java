@@ -1,4 +1,4 @@
-package com.my.lfy.exception;
+package com.my.lfy.utils;
 
 import cn.hutool.core.util.PinyinUtil;
 import com.my.lfy.utils.MyPinYinUtils;

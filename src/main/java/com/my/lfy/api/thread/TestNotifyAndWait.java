@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * TestNotifyAndWait
  * ① : 模拟队列的进出;
- * ② : 模拟练习 : 有两个线程,处理一个list中的数据,当处理到一般的时候,通知另一个线程做另外一件事
+ * ② : 模拟练习 : 有两个线程,A线程在list中添加10条数据,当添加到一半的时候,通知B线程打印一条记录,然后通知A继续添加数据;
  *
  * @author lfy
  * @date 2020/7/23
@@ -72,8 +72,20 @@ class TaskQueue {
 }
 
 class Monitor {
+
+    /**
+     * 锁
+     */
     public static final Object LOCK = new Object();
+
+    /**
+     * 最大数据量
+     */
     public static final int MAX = 10;
+
+    /**
+     * 存储数据List
+     */
     public static List<Integer> DATA_LIST = new ArrayList<>();
 }
 

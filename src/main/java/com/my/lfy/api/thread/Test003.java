@@ -38,7 +38,6 @@ class AddThread extends Thread {
     public void run() {
         log.info("add ...");
         for (int i = 0; i < 10000; i++) {
-
             synchronized (Counter.LOCK) {
                 Counter.count += 1;
             }

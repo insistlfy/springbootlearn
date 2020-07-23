@@ -2,7 +2,9 @@ package com.my.lfy.api.thread;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -10,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * TestNotifyAndWait
- * 模拟队列
+ * ① : 模拟队列的进出;
+ * ② : 模拟练习 : 有两个线程,处理一个list中的数据,当处理到一般的时候,通知另一个线程做另外一件事
  *
  * @author lfy
  * @date 2020/7/23
@@ -70,15 +73,18 @@ class TaskQueue {
 
 class Monitor {
     public static final Object LOCK = new Object();
+    public static final int MAX = 10;
+    public static List<Integer> DATA_LIST = new ArrayList<>();
 }
 
 class ThreadA extends Thread {
     @Override
     public void run() {
         synchronized (Monitor.LOCK) {
-            for (int i = 1; i <= 10; i++) {
-                System.out.println("ThreadA--------------run," + i);
-                if (i == 5) {
+            for (int i = 0; i < Monitor.MAX; i++) {
+                Monitor.DATA_LIST.add(i);
+                System.out.println("ThreadA-------------run , currentSize is " + Monitor.DATA_LIST.size());
+                if (Monitor.DATA_LIST.size() == Monitor.MAX / 2) {
                     try {
                         Monitor.LOCK.wait();
                     } catch (InterruptedException e) {

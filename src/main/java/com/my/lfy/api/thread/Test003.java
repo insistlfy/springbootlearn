@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Test003
- * 线程同步测试
+ * 线程同步测试 synchronized
  *
  * @author lfy
  * @date 2020/7/22

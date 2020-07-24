@@ -1,5 +1,6 @@
 package com.my.lfy;
 
+import com.dtflys.forest.annotation.ForestScan;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@EnableScheduling
 @EnableRetry
 @ServletComponentScan
+@ForestScan(basePackages = "com.my.lfy.api.forest.client")
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @MapperScan(basePackages = {"com.my.lfy.api.transaction.mapper"})
 public class LfyApplication {

@@ -45,7 +45,7 @@ public class TestController {
     public JsonResult test02() {
 
         List<String> params = new ArrayList<>();
-//        params.add("REG_DIRECT_CHARGE");
+        params.add("REG_REFUSE_REASON");
         return new JsonResult<>(commonMapper.queryList(params));
     }
 

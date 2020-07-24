@@ -10,20 +10,8 @@ public class GreatestCommonDivisor {
 
     public static void main(String[] args) {
 
-    }
-
-
-    /**
-     * 暴力法
-     *
-     * @param a int
-     * @param b int
-     * @return int
-     */
-    public static int getValue1(int a, int b) {
-
-
-        return 1;
+        System.out.println(getValue1(1, 2));
+        System.out.println(getValue2(1, 2));
     }
 
     /**
@@ -33,10 +21,21 @@ public class GreatestCommonDivisor {
      * @param b int
      * @return int
      */
-    public static int getValue2(int a, int b) {
+    public static int getValue1(int a, int b) {
 
+        //交换两数
+        if (a < b) {
 
-        return 1;
+            a = a ^ b;
+            b = a ^ b;
+            a = a ^ b;
+        }
+
+        if (a % b == 0) {
+            return b;
+        }
+
+        return getValue1(b, a % b);
     }
 
     /**
@@ -46,22 +45,15 @@ public class GreatestCommonDivisor {
      * @param b int
      * @return int
      */
-    public static int getValue3(int a, int b) {
+    public static int getValue2(int a, int b) {
 
+        int big = Math.max(a, b);
+        int small = Math.min(a, b);
 
-        return 1;
-    }
+        if (big == small) {
+            return small;
+        }
 
-    /**
-     * 优化的更新减损法
-     *
-     * @param a int
-     * @param b int
-     * @return int
-     */
-    public static int getValue4(int a, int b) {
-
-
-        return 1;
+        return getValue2(big - small, small);
     }
 }

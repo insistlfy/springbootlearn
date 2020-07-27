@@ -19,11 +19,18 @@ public class TestSemaphore {
         Thread threadA = new Thread(() -> {
             NUM = 1;
             System.out.println(Thread.currentThread().getName() + "初始化NUM,NUM = " + NUM);
+            //释放一个许可，将其返回给信号量
+            try {
+                SEMAPHORE.acquire();
+            } catch (InterruptedException e) {
+                SEMAPHORE.release();
+            }
             SEMAPHORE.release();
         }, "threadA");
 
         Thread threadB = new Thread(() -> {
             try {
+                //从此信号量获取一个许可，在提供一个许可前一直将线程阻塞，否则线程被中断
                 SEMAPHORE.acquire();
                 SEMAPHORE.release();
             } catch (InterruptedException e) {
@@ -35,6 +42,7 @@ public class TestSemaphore {
         Thread threadC = new Thread(() -> {
             try {
                 SEMAPHORE.acquire();
+                SEMAPHORE.release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

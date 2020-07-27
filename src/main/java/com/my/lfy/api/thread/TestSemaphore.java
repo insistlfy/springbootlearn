@@ -1,4 +1,4 @@
-package com.my.lfy.api.test;
+package com.my.lfy.api.thread;
 
 import java.util.concurrent.Semaphore;
 

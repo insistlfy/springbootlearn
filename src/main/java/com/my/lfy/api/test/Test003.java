@@ -31,18 +31,20 @@ public class Test003 {
 
         Mapping mappingWeight = Mapping.builder()
                 .key("test")
-                .weightA("weight_a")
-                .weightB("weight_b")
+                .nameA("weightA")
+                .nameB("weightB")
                 .build();
         mappingList.add(mappingWeight);
 
 
         ObjectA a = ObjectA.builder()
-                .nameA("A")
+                .nameA("nameA")
+                .weightA("weightA")
                 .build();
 
         ObjectB b = ObjectB.builder()
                 .nameB(getFieldValueByFieldName("test", "nameB", mappingList, a, String.class))
+                .weightB(getFieldValueByFieldName("test", "weightB", mappingList, a, String.class))
                 .build();
 
         System.out.println(b);
@@ -108,8 +110,4 @@ class Mapping implements Serializable {
     private String nameA;
 
     private String nameB;
-
-    private String weightA;
-
-    private String weightB;
 }

@@ -41,24 +41,25 @@ public class Test003 {
                 .nameA("A")
                 .build();
 
-        String nameA1 = mappingList.stream()
-                .filter(e -> "test".equals(e.getKey()) && "nameB".equals(e.getNameB()))
-                .findFirst()
-                .get()
-                .getNameA();
-        String fieldValueByFieldName = getFieldValueByFieldName(nameA1, a, String.class);
         ObjectB b = ObjectB.builder()
-                .nameB(fieldValueByFieldName)
+                .nameB(getFieldValueByFieldName("test", "nameB", mappingList, a, String.class))
                 .build();
 
         System.out.println(b);
 
     }
 
-    public static <T> T getFieldValueByFieldName(String fieldName, Object object, Class<T> tClass) {
+    public static <T> T getFieldValueByFieldName(String tableName, String fieldName, List<Mapping> mappingList,
+                                                 Object object, Class<T> cls) {
+
+        String nameA = mappingList.stream()
+                .filter(e -> tableName.equals(e.getKey()) && fieldName.equals(e.getNameB()))
+                .findFirst()
+                .get()
+                .getNameA();
 
         try {
-            Field field = object.getClass().getDeclaredField(fieldName);
+            Field field = object.getClass().getDeclaredField(nameA);
             field.setAccessible(true);
             return (T) field.get(object);
         } catch (NoSuchFieldException | IllegalAccessException e) {

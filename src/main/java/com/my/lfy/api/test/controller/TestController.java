@@ -1,5 +1,7 @@
 package com.my.lfy.api.test.controller;
 
+import com.my.lfy.api.retry.service.RetryService;
+import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.test.model.TestModel;
 import com.my.lfy.api.test.service.MyFactory;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
@@ -7,6 +9,7 @@ import com.my.lfy.utils.JsonResult;
 import com.my.lfy.utils.MyEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +24,10 @@ import java.util.List;
  * @author lfy
  * @date 2020/7/13
  **/
+@Slf4j
 @RestController
 @RequestMapping("v1/test")
-@Api(tags = "【TEST-STRATEGY】")
+@Api(tags = "【TEST-COMMON】")
 public class TestController {
 
     @Autowired
@@ -31,6 +35,12 @@ public class TestController {
 
     @Autowired
     private CommonMapper commonMapper;
+
+    @Autowired
+    private RetryService retryService;
+
+    @Autowired
+    private SpringTaskConfig springTaskConfig;
 
     @PostMapping()
     @ApiOperation(value = "test-01")
@@ -58,5 +68,17 @@ public class TestController {
 //        tempList.add("REG_DIRECT_CHARGE");
         model.setCode(tempList);
         return new JsonResult<>(commonMapper.queryListModel(model));
+    }
+
+    @PostMapping("/04")
+    @ApiOperation(value = "test-retry")
+    public JsonResult test04() {
+
+        log.info("test-retry...");
+
+        springTaskConfig.executor().execute(() -> retryService.test("sad"));
+
+        log.info("test01---end");
+        return test02();
     }
 }

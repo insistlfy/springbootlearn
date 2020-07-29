@@ -4,6 +4,7 @@ import com.my.lfy.api.retry.service.RetryService;
 import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.test.model.TestModel;
 import com.my.lfy.api.test.service.MyFactory;
+import com.my.lfy.api.test.service.TestService;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
 import com.my.lfy.utils.JsonResult;
 import com.my.lfy.utils.MyEnum;
@@ -37,10 +38,7 @@ public class TestController {
     private CommonMapper commonMapper;
 
     @Autowired
-    private RetryService retryService;
-
-    @Autowired
-    private SpringTaskConfig springTaskConfig;
+    private TestService testService;
 
     @PostMapping()
     @ApiOperation(value = "test-01")
@@ -53,10 +51,8 @@ public class TestController {
     @PostMapping("/02")
     @ApiOperation(value = "test-mybatis-list")
     public JsonResult test02() {
-
-        List<String> params = new ArrayList<>();
-        params.add("REG_REFUSE_REASON");
-        return new JsonResult<>(commonMapper.queryList(params));
+        testService.test02();
+        return new JsonResult<>();
     }
 
     @PostMapping("/03")
@@ -73,14 +69,7 @@ public class TestController {
     @PostMapping("/04")
     @ApiOperation(value = "test-retry")
     public JsonResult test04() {
-
-        log.info("test-retry...");
-
-        springTaskConfig.executor().execute(() -> retryService.test("sad"));
-
-        springTaskConfig.executor().execute(() -> retryService.test01("sad"));
-
-        log.info("test01---end");
-        return test02();
+        testService.test04();
+        return new JsonResult<>();
     }
 }

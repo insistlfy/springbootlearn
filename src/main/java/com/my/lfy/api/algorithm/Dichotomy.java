@@ -14,7 +14,7 @@ public class Dichotomy {
 
         int[] arr = {1, 2, 3, 4, 5};
         System.out.println(dichotomy(arr, 4));
-        dichotomyNew(arr, 2);
+        System.out.println(dichotomyNew(arr, 2));
     }
 
     public static int dichotomy(int[] array, int value) {

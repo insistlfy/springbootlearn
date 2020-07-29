@@ -27,6 +27,15 @@ public class RetryService {
         return true;
     }
 
+    @Retryable(value = Exception.class, maxAttempts = 2, backoff = @Backoff(delay = 5000, multiplier = 1))
+    public boolean test01(String str) {
+        log.info("starting01 ...");
+        if (SyncStringUtils.startWithChar(str)) {
+            throw new ServiceException("该字符串不能已字符串开头...");
+        }
+        return true;
+    }
+
     @Recover
     public boolean callBack(Exception e) {
         log.info("回调方法执行...");

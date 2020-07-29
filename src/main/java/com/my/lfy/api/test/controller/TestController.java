@@ -78,6 +78,8 @@ public class TestController {
 
         springTaskConfig.executor().execute(() -> retryService.test("sad"));
 
+        springTaskConfig.executor().execute(() -> retryService.test01("sad"));
+
         log.info("test01---end");
         return test02();
     }

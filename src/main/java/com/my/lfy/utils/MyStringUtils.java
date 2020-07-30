@@ -2,6 +2,8 @@ package com.my.lfy.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Scanner;
+
 /**
  * MyStringUtils
  *
@@ -12,17 +14,28 @@ public class MyStringUtils {
 
     public static void main(String[] args) {
 
-        System.out.println(reverse("1  23"));
+        Scanner scanner = new Scanner(System.in);
+        String next = scanner.nextLine();
+        System.out.println(reverse(next));
+
+        String next1 = scanner.nextLine();
+        System.out.println(reverse(next1));
+        System.out.println("===============================================");
+
+        System.out.println(reverse("m jbrwbmamzlz bkjokxancguvcoc"));
         System.out.println(new StringBuilder().append("1  23").reverse());
+        System.out.println("===============================================");
 
         String str = "1234";
         System.out.println(str.substring(0, str.length() / 2));
         System.out.println(str.substring(str.length() / 2));
+        System.out.println("===============================================");
 
         String str1 = "12345";
         System.out.println(str1.indexOf(str1.length() / 2));
         System.out.println(str1.substring(0, str1.length() / 2));
         System.out.println(str1.substring(str1.length() / 2));
+        System.out.println("===============================================");
     }
 
     /**

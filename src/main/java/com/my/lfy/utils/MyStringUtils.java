@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * MyStringUtils
@@ -30,6 +31,7 @@ public class MyStringUtils {
         System.out.println("===============================================");
 
         System.out.println(test(next));
+        System.out.println(test1(next));
     }
 
     /**
@@ -116,6 +118,30 @@ public class MyStringUtils {
         System.out.println(resultMap);
         System.out.println(list);
 
+        return builder.toString();
+    }
+
+    public static String test1(String source) {
+
+        char[] charArr = source.toCharArray();
+        Map<String, Integer> resultMap = new HashMap<>();
+        for (char c : charArr) {
+            if (PATTERN.matcher(String.valueOf(c)).matches()) {
+                resultMap.merge(String.valueOf(c), 1, Integer::sum);
+            }
+        }
+
+        List<Map.Entry<String, Integer>> entryList = resultMap.entrySet().stream()
+                .sorted((o1, o2) -> {
+                    if (o1.getValue().equals(o2.getValue())) {
+                        return o1.getKey().charAt(0) - o2.getKey().charAt(0);
+                    }
+                    return o2.getValue() - o1.getValue();
+                })
+                .collect(Collectors.toList());
+
+        StringBuilder builder = new StringBuilder();
+        entryList.forEach(e -> builder.append(e.getKey()));
         return builder.toString();
     }
 }

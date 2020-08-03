@@ -1,7 +1,5 @@
 package com.my.lfy.utils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -32,6 +30,7 @@ public class MyStringUtils {
 
         System.out.println(strSort(next));
         System.out.println(strSort1(next));
+
     }
 
     /**
@@ -49,30 +48,6 @@ public class MyStringUtils {
             target.append(charArr[charArr.length - 1 - i]);
         }
         return target.toString();
-    }
-
-    /**
-     * 字符串反转
-     *
-     * @param source String
-     * @return String
-     */
-    public static String reverseNew(String source) {
-
-        if (StringUtils.isBlank(source) || source.length() == 1) {
-            return source;
-        }
-
-        if (source.length() % 2 == 0) {
-
-            String before = source.substring(source.length() / 2 - 1);
-            String after = source.substring(source.length() / 2, source.length() - 1);
-            return "";
-
-        }
-
-
-        return "";
     }
 
     /**

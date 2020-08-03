@@ -30,8 +30,8 @@ public class MyStringUtils {
         System.out.println(new StringBuilder().append("1  23").reverse());
         System.out.println("===============================================");
 
-        System.out.println(test(next));
-        System.out.println(test1(next));
+        System.out.println(strSort(next));
+        System.out.println(strSort1(next));
     }
 
     /**
@@ -92,7 +92,7 @@ public class MyStringUtils {
      * @return String
      */
 
-    public static String test(String source) {
+    public static String strSort(String source) {
 
         char[] charArr = source.toCharArray();
         Map<String, Integer> resultMap = new HashMap<>();
@@ -121,7 +121,7 @@ public class MyStringUtils {
         return builder.toString();
     }
 
-    public static String test1(String source) {
+    public static String strSort1(String source) {
 
         char[] charArr = source.toCharArray();
         Map<String, Integer> resultMap = new HashMap<>();

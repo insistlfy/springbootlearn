@@ -2,7 +2,8 @@ package com.my.lfy.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * MyStringUtils
@@ -11,6 +12,8 @@ import java.util.Scanner;
  * @date 2020/7/28
  **/
 public class MyStringUtils {
+
+    public static Pattern PATTERN = Pattern.compile("^[0-9A-Za-z ]$");
 
     public static void main(String[] args) {
 
@@ -26,16 +29,7 @@ public class MyStringUtils {
         System.out.println(new StringBuilder().append("1  23").reverse());
         System.out.println("===============================================");
 
-        String str = "1234";
-        System.out.println(str.substring(0, str.length() / 2));
-        System.out.println(str.substring(str.length() / 2));
-        System.out.println("===============================================");
-
-        String str1 = "12345";
-        System.out.println(str1.indexOf(str1.length() / 2));
-        System.out.println(str1.substring(0, str1.length() / 2));
-        System.out.println(str1.substring(str1.length() / 2));
-        System.out.println("===============================================");
+        System.out.println(test(next));
     }
 
     /**
@@ -77,5 +71,51 @@ public class MyStringUtils {
 
 
         return "";
+    }
+
+    /**
+     * 如果统计的个数相同，则按照ASCII码由小到大排序输出 。如果有其他字符，则对这些字符不用进行统计。
+     * <p>
+     * 实现以下接口：
+     * 输入一个字符串，对字符中的各个英文字符，数字，空格进行统计（可反复调用）
+     * 按照统计个数由多到少输出统计结果，如果统计的个数相同，则按照ASCII码由小到大排序输出
+     * 清空目前的统计结果，重新统计
+     * 调用者会保证：
+     * 输入的字符串以‘\0’结尾。
+     * <p>
+     * input : (aadddccddc)输入一串字符。
+     * output : (dca)对字符中的各个英文字符（大小写分开统计），数字，空格进行统计，并按照统计个数由多到少输出,如果统计的个数相同，则按照ASII码由小到大排序输出 。如果有其他字符，则对这些字符不用进行统计。
+     *
+     * @param source String
+     * @return String
+     */
+
+    public static String test(String source) {
+
+        char[] charArr = source.toCharArray();
+        Map<String, Integer> resultMap = new HashMap<>();
+        for (char c : charArr) {
+            if (PATTERN.matcher(String.valueOf(c)).matches()) {
+                resultMap.merge(String.valueOf(c), 1, Integer::sum);
+            }
+        }
+
+        Comparator<Map.Entry<String, Integer>> valueComparator = (o1, o2) -> {
+            if (o1.getValue().equals(o2.getValue())) {
+                return o1.getKey().charAt(0) - o2.getKey().charAt(0);
+            }
+            return o2.getValue() - o1.getValue();
+        };
+
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(resultMap.entrySet());
+        list.sort(valueComparator);
+
+        StringBuilder builder = new StringBuilder();
+        list.forEach(e -> builder.append(e.getKey()));
+
+        System.out.println(resultMap);
+        System.out.println(list);
+
+        return builder.toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.my.lfy.utils;
 
+import com.my.lfy.exception.ServiceException;
+
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -18,7 +20,8 @@ public class MyStringUtils {
 
         Scanner scanner = new Scanner(System.in);
         String next = scanner.nextLine();
-        System.out.println(reverse(next));
+//        System.out.println(reverse(next));
+        System.out.println(reverseNew(next));
 
         String next1 = scanner.nextLine();
         System.out.println(reverse(next1));
@@ -48,6 +51,29 @@ public class MyStringUtils {
             target.append(charArr[charArr.length - 1 - i]);
         }
         return target.toString();
+    }
+
+    /**
+     * 字符串反转
+     *
+     * @param source String
+     * @return String
+     */
+    public static String reverseNew(String source) {
+
+        Optional.ofNullable(source).orElseThrow(() -> new ServiceException("参数不能为空"));
+        char[] charArr = source.toCharArray();
+
+        Stack<Character> stack = new Stack<>();
+        for (char c : charArr) {
+            stack.push(c);
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < charArr.length; i++) {
+            builder.append(stack.pop());
+        }
+        return builder.toString();
     }
 
     /**

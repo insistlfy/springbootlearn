@@ -146,6 +146,13 @@ public class MyStringUtils {
         return builder.toString();
     }
 
+    /**
+     * 统计一个字符串中某个字符出现的次数
+     *
+     * @param source     String
+     * @param targetChar char
+     * @return int
+     */
     public static int findCharTimes(String source, char targetChar) {
         Optional.ofNullable(source).orElseThrow(() -> new ServiceException("参数不能为空"));
 
@@ -159,6 +166,13 @@ public class MyStringUtils {
         return count;
     }
 
+    /**
+     * 统计一个字符串中某个字符出现的次数
+     *
+     * @param source     String
+     * @param targetChar char
+     * @return int
+     */
     public static int findCharTimesNew(String source, char targetChar) {
         Optional.ofNullable(source).orElseThrow(() -> new ServiceException("参数不能为空"));
 

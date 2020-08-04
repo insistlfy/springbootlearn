@@ -20,19 +20,19 @@ public class MyStringUtils {
 
         Scanner scanner = new Scanner(System.in);
         String next = scanner.nextLine();
-//        System.out.println(reverse(next));
+
+        System.out.println(reverse(next));
         System.out.println(reverseNew(next));
+        System.out.println("=====================================");
 
-        String next1 = scanner.nextLine();
-        System.out.println(reverse(next1));
-        System.out.println("===============================================");
 
-        System.out.println(reverse("m jbrwbmamzlz bkjokxancguvcoc"));
-        System.out.println(new StringBuilder().append("1  23").reverse());
-        System.out.println("===============================================");
+        System.out.println(findCharTimes(next, 's'));
+        System.out.println(findCharTimesNew(next, 's'));
+        System.out.println("=====================================");
 
         System.out.println(strSort(next));
         System.out.println(strSort1(next));
+
 
     }
 
@@ -144,5 +144,27 @@ public class MyStringUtils {
         StringBuilder builder = new StringBuilder();
         entryList.forEach(e -> builder.append(e.getKey()));
         return builder.toString();
+    }
+
+    public static int findCharTimes(String source, char targetChar) {
+        Optional.ofNullable(source).orElseThrow(() -> new ServiceException("参数不能为空"));
+
+        char[] charArr = source.toCharArray();
+        int count = 0;
+        for (char c : charArr) {
+            if (c == targetChar) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int findCharTimesNew(String source, char targetChar) {
+        Optional.ofNullable(source).orElseThrow(() -> new ServiceException("参数不能为空"));
+
+        int originLength = source.length();
+        source = source.replace(String.valueOf(targetChar), "");
+        int newLength = source.length();
+        return originLength - newLength;
     }
 }

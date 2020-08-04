@@ -60,7 +60,7 @@ public class FibonacciSeries {
 
         int first = 1;
         int second = 1;
-        int reslut = 0;
+        int reslut;
 
         System.out.print(0 + "\t" + 1 + "\t" + 1 + "\t");
 

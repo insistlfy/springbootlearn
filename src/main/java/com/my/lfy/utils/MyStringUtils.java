@@ -18,22 +18,38 @@ public class MyStringUtils {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        String next = scanner.nextLine();
+//        Scanner scanner = new Scanner(System.in);
+//        String next = scanner.nextLine();
+//
+//        System.out.println(reverse(next));
+//        System.out.println(reverseNew(next));
+//        System.out.println("=====================================");
+//
+//
+//        System.out.println(findCharTimes(next, 's'));
+//        System.out.println(findCharTimesNew(next, 's'));
+//        System.out.println("=====================================");
+//
+//        System.out.println(strSort(next));
+//        System.out.println(strSort1(next));
+//        System.out.println("=====================================");
 
-        System.out.println(reverse(next));
-        System.out.println(reverseNew(next));
-        System.out.println("=====================================");
+        MyStringUtils myStringUtils = new MyStringUtils();
+//        String str = new String("good");
+        String str = "good";
+        char[] ch = {'a', 'b', 'c'};
+        int a = 1;
+        myStringUtils.change(str, ch, a);
+        System.out.println(str);
+        System.out.println(ch);
+        System.out.println(a);
+    }
 
-
-        System.out.println(findCharTimes(next, 's'));
-        System.out.println(findCharTimesNew(next, 's'));
-        System.out.println("=====================================");
-
-        System.out.println(strSort(next));
-        System.out.println(strSort1(next));
-
-
+    public void change(String str1, char ch1[], int b) {
+        b = 100;
+        str1 = "test ok";   // 等价与 str1  = new String("test ok");
+        ch1[0] = 'g';
+        System.out.println(str1);
     }
 
     /**

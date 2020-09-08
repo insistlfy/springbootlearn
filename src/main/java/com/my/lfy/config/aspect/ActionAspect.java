@@ -51,7 +51,7 @@ public class ActionAspect {
 
         log.info("执行的类名: {}", "(" + className.substring(className.lastIndexOf(".") + 1) + ".java:1)");
         log.info("执行的方法名: {}", joinPoint.getSignature().getName());
-        log.info("参数: {}", JSON.toJSONString(joinPoint.getArgs()));
+        log.info("参数: {}", joinPoint.getArgs());
         //log 方法参数
         Enumeration<String> enu = request.getParameterNames();
         while (enu.hasMoreElements()) {

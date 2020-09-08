@@ -3,10 +3,17 @@ package com.my.lfy.api.test.service;
 import com.my.lfy.api.retry.service.RetryService;
 import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
+import com.my.lfy.utils.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,5 +53,27 @@ public class TestService {
 
         test02();
         return true;
+    }
+
+    public void testExcel(HttpServletRequest request, HttpServletResponse response, String filePath,
+                          Integer sheetAt, Integer cellAt, String source, String target) {
+        try {
+            Workbook workbook = WorkbookFactory.create(new File(filePath));
+            Sheet sheet = workbook.getSheetAt(sheetAt);
+            int totalRow = sheet.getLastRowNum();
+            for (int i = 0; i <= totalRow; i++) {
+                Row row = sheet.getRow(i);
+                if (null == row) {
+                    continue;
+                }
+                Cell cell = row.getCell(cellAt);
+                if (cell != null && cell.getStringCellValue().equals(source)) {
+                    cell.setCellValue(target);
+                }
+            }
+            ExcelUtils.downloadExcel("test", response, workbook);
+        } catch (IOException | InvalidFormatException e) {
+            e.printStackTrace();
+        }
     }
 }

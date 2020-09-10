@@ -69,12 +69,10 @@ class CountTask extends RecursiveTask<Integer> {
             leftTask.fork();
             rightTask.fork();
 
-
             int leftResult = leftTask.join();
             int rightResult = rightTask.join();
 
             sum = leftResult + rightResult;
-
         }
         return sum;
     }

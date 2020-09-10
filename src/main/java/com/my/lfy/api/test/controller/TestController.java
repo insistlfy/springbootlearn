@@ -85,4 +85,10 @@ public class TestController {
                           @RequestParam("target") String target) {
         testService.testExcel(request, response, filePath, sheetAt, cellAt, source, target);
     }
+
+    @PostMapping("/csv")
+    public JsonResult testCsv() {
+
+        return new JsonResult<>(testService.testCsv());
+    }
 }

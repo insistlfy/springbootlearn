@@ -41,5 +41,15 @@
         </where>
     </select>
 
+    <select id="queryPatientInfo" resultType="java.lang.String">
+        select CARDNO from BSOFT.VIEW_PATIENTINFO
+        <where>
+            PATIENTTYPE = '2' and PAYKINDCODE &lt;&gt; '1000' and CARDNO in
+            <foreach collection="cardNoList" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
 
 </mapper>

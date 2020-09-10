@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * PgCommonMapper
@@ -55,4 +56,12 @@ public interface CommonMapper {
      * @return List
      */
     List<String> queryListModel(@Param("model") TestModel model);
+
+    /**
+     * 查询医保患者
+     *
+     * @param cardNoList List<String>
+     * @return List<Map < String, Object>>
+     */
+    List<String> queryPatientInfo(@Param("cardNoList") List<String> cardNoList);
 }

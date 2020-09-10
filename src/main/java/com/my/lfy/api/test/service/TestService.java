@@ -3,8 +3,10 @@ package com.my.lfy.api.test.service;
 import com.my.lfy.api.retry.service.RetryService;
 import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
+import com.my.lfy.utils.CsvUtils;
 import com.my.lfy.utils.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * TestService
@@ -75,5 +76,21 @@ public class TestService {
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public Set<String> testCsv() {
+
+        Set<String> result = new HashSet<>();
+        List<String> cardNoList = CsvUtils.getCsv("/csv/cardNo.csv");
+        log.info("cardNoList size is {}.", cardNoList.size());
+
+        List<List<String>> tempList = ListUtils.partition(cardNoList, 1000);
+        log.info("tempList size is {}.", tempList.size());
+        for (List<String> list : tempList) {
+            List<String> tempMap = commonMapper.queryPatientInfo(list);
+            result.addAll(tempMap);
+        }
+        log.info("result size is {}.", result.size());
+        return result;
     }
 }

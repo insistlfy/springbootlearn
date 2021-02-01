@@ -71,10 +71,10 @@ public class RedisLearn {
         jedis.hset("hash", "key1", "Hello");
         jedis.hset("hash", "key2", "Redis");
 
-        Map<String, String> map = new HashMap<>();
-        map.put("hello", "Hello");
-        map.put("world", "World");
-        jedis.hset("hash2", map);
+//        Map<String, String> map = new HashMap<>();
+//        map.put("hello", "Hello");
+//        map.put("world", "World");
+//        jedis.hset("hash2", map);
 
         log.info("redis <---> Hash ---->hash={}.", jedis.hgetAll("hash"));
         log.info("redis <---> Hash ---->hash2={}.", jedis.hgetAll("hash2"));

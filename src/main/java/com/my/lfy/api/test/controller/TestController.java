@@ -88,7 +88,11 @@ public class TestController {
 
     @PostMapping("/csv")
     public JsonResult testCsv() {
-
         return new JsonResult<>(testService.testCsv());
+    }
+
+    @PostMapping("/sign")
+    public JsonResult testSign() {
+        return new JsonResult<>(testService.testSign());
     }
 }

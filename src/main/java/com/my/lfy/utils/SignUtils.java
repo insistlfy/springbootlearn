@@ -122,9 +122,9 @@ public final class SignUtils {
                 .extend(extend)
                 .build();
 
-        String newSign = sign(params);
+        String newSign = sign(user);
         System.out.println(newSign);
-        System.out.println(verifySign(params, newSign));
+        System.out.println(verifySign(user, newSign));
 
     }
 }

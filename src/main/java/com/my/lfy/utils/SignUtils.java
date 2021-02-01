@@ -48,6 +48,7 @@ public final class SignUtils {
             }
         });
         builder.append("secret=").append(SECRET_KEY);
+        log.info("builder={}.", builder);
         return DigestUtils.md5DigestAsHex(builder.toString().toUpperCase().getBytes());
     }
 
@@ -102,17 +103,17 @@ public final class SignUtils {
 
     public static void main(String[] args) {
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("userName", "Rose");
-        params.put("sex", "F");
+//        Map<String, Object> params = new HashMap<>(4);
+//        params.put("userName", "Rose");
+//        params.put("sex", "F");
+//
+//        String sign = sign(params);
+//        System.out.println(sign);
+//        System.out.println(verifySign(params, sign));
+//        System.out.println("======================================");
 
-        String sign = sign(params);
-        System.out.println(sign);
-        System.out.println(verifySign(params, sign));
-        System.out.println("======================================");
 
-
-        Map<String, Object> extend = new HashMap<>(4);
+        Map<String, Object> extend = new HashMap<>(8);
         extend.put("goodAt", "basketball");
         extend.put("nation", "America");
         User user = User.builder()

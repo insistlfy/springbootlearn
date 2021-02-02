@@ -69,10 +69,11 @@ public class SignAspect {
             throw new ServiceException("验签失败");
         }
 
-        if (redisHelper.existKey(MyConstants.COMMON_CACHE_SIGN, timeStamp.concat(nonce).concat(sign))) {
+        String redisKey = timeStamp.concat(nonce).concat(sign);
+        if (redisHelper.existKey(MyConstants.COMMON_CACHE_SIGN, redisKey)) {
             throw new ServiceException("请求重复了,请30秒后重试");
         } else {
-            redisHelper.setObj(MyConstants.COMMON_CACHE_SIGN, sign, sign, 30L);
+            redisHelper.setObj(MyConstants.COMMON_CACHE_SIGN, redisKey, sign, 30L);
         }
 
         log.info("verifySign successfully... ");

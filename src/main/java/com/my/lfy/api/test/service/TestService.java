@@ -5,6 +5,7 @@ import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
 import com.my.lfy.utils.CsvUtils;
 import com.my.lfy.utils.ExcelUtils;
+import com.my.lfy.utils.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -94,7 +95,7 @@ public class TestService {
         return result;
     }
 
-    public String testSign() {
+    public String testSign(User user) {
 
 
         return null;

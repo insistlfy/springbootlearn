@@ -4,16 +4,15 @@ import com.my.lfy.api.test.model.TestModel;
 import com.my.lfy.api.test.service.MyFactory;
 import com.my.lfy.api.test.service.TestService;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
+import com.my.lfy.config.annotation.Sign;
 import com.my.lfy.utils.JsonResult;
 import com.my.lfy.utils.MyEnum;
+import com.my.lfy.utils.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +91,8 @@ public class TestController {
     }
 
     @PostMapping("/sign")
-    public JsonResult testSign() {
-        return new JsonResult<>(testService.testSign());
+    @Sign
+    public JsonResult testSign(@RequestBody User user) {
+        return new JsonResult<>(testService.testSign(user));
     }
 }

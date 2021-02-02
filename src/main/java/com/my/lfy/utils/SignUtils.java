@@ -2,6 +2,7 @@ package com.my.lfy.utils;
 
 import com.my.lfy.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Base64Utils;
 import org.springframework.util.DigestUtils;
 
 import java.beans.BeanInfo;
@@ -10,10 +11,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -49,7 +47,8 @@ public final class SignUtils {
         });
         builder.append("secret=").append(SECRET_KEY);
         log.info("builder={}.", builder);
-        return DigestUtils.md5DigestAsHex(builder.toString().toUpperCase().getBytes());
+        String md5 = DigestUtils.md5DigestAsHex(builder.toString().toUpperCase().getBytes());
+        return Base64Utils.encodeToUrlSafeString(md5.getBytes());
     }
 
     /**

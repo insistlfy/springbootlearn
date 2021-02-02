@@ -57,23 +57,19 @@ public class SignAspect {
         long now = System.currentTimeMillis() / 1000;
         long timeLimit = 120L;
 
-        if (now - Long.parseLong(nonce) > timeLimit) {
+        if (now - Long.parseLong(timeStamp) > timeLimit) {
             throw new ServiceException("请求过期，请重新发起请求");
         }
 
+        //请求参数
         Object[] args = point.getArgs();
 
-        Map<String, Object> signMap = new HashMap<>(8);
-        signMap.put("timeStamp", timeStamp);
-        signMap.put("nonce", nonce);
-        signMap.put("sign", sign);
-
         //验签
-        if (!SignUtils.verifySign("", sign)) {
+        if (!SignUtils.verifySign(args[0], sign)) {
             throw new ServiceException("验签失败");
         }
 
-        if (redisHelper.existKey(MyConstants.COMMON_CACHE_SIGN, sign)) {
+        if (redisHelper.existKey(MyConstants.COMMON_CACHE_SIGN, timeStamp.concat(nonce).concat(sign))) {
             throw new ServiceException("请求重复了,请30秒后重试");
         } else {
             redisHelper.setObj(MyConstants.COMMON_CACHE_SIGN, sign, sign, 30L);

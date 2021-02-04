@@ -4,7 +4,9 @@ import com.my.lfy.api.test.model.TestModel;
 import com.my.lfy.api.test.service.MyFactory;
 import com.my.lfy.api.test.service.TestService;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
+import com.my.lfy.config.annotation.OperLog;
 import com.my.lfy.config.annotation.Sign;
+import com.my.lfy.exception.BaseExceptionMsg;
 import com.my.lfy.utils.JsonResult;
 import com.my.lfy.utils.MyEnum;
 import com.my.lfy.utils.User;
@@ -13,7 +15,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,4 +96,12 @@ public class TestController {
     public JsonResult testSign(@RequestBody User user) {
         return new JsonResult<>(testService.testSign(user));
     }
+
+
+    @OperLog(operModel = "test", operDesc = "test", operType = com.my.lfy.config.constant.MyEnum.OperType.OTHER)
+    @PostMapping("/test/log")
+    public JsonResult testLog() {
+        return new JsonResult(BaseExceptionMsg.EXECUTE_OK);
+    }
+
 }

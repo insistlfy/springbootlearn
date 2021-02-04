@@ -2,8 +2,8 @@ package com.my.lfy.config.aspect;
 
 import com.my.lfy.config.annotation.Sign;
 import com.my.lfy.config.constant.MyConstants;
-import com.my.lfy.exception.ServiceException;
 import com.my.lfy.config.redis.RedisHelper;
+import com.my.lfy.exception.ServiceException;
 import com.my.lfy.utils.SignUtils;
 import com.my.lfy.utils.SyncStringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * SignAspect

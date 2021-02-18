@@ -79,14 +79,20 @@ public class Test004 {
         String name = "James|Rose";
 
         //反例
-        System.out.println(goodAt.split(".")[0]);
-        System.out.println(name.split("|")[1]);
+//        System.out.println(goodAt.split(".")[0]);
+//        System.out.println(name.split("|")[1]);
 
         //正例
         System.out.println(goodAt.split("\\.")[0]);
         System.out.println(name.split("\\|")[1]);
 
-        List<String> list = new ArrayList<>();
+        String str1 = "ab" + "c";
+        String str2 = "abc";
+        System.out.println(str1 == str2);
+
+        String str3 = "ab";
+        String str4 = str3 + "c";
+        System.out.println(str2 == str4);
     }
 
 }

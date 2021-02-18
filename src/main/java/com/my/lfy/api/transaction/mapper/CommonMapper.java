@@ -1,11 +1,13 @@
 package com.my.lfy.api.transaction.mapper;
 
+import com.my.lfy.api.test.model.DicModel;
 import com.my.lfy.api.test.model.TestModel;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.cursor.Cursor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * PgCommonMapper
@@ -64,4 +66,13 @@ public interface CommonMapper {
      * @return List<Map < String, Object>>
      */
     List<String> queryPatientInfo(@Param("cardNoList") List<String> cardNoList);
+
+    /**
+     * test Cursor
+     *
+     * @param limit Integer
+     * @return Cursor
+     */
+    @Select("select * from public.dic_stan limit #{limit}")
+    Cursor<DicModel> scan(@Param("limit") Integer limit);
 }

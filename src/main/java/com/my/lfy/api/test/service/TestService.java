@@ -2,16 +2,19 @@ package com.my.lfy.api.test.service;
 
 import com.my.lfy.api.retry.service.RetryService;
 import com.my.lfy.api.springtask.SpringTaskConfig;
+import com.my.lfy.api.test.model.DicModel;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
 import com.my.lfy.utils.CsvUtils;
 import com.my.lfy.utils.ExcelUtils;
 import com.my.lfy.utils.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.ListUtils;
+import org.apache.ibatis.cursor.Cursor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -98,6 +101,13 @@ public class TestService {
     public String testSign(User user) {
 
 
+        return null;
+    }
+
+    public List<DicModel> testMybatis(Integer limit) {
+
+        Cursor<DicModel> cursor = commonMapper.scan(limit);
+        cursor.forEach(e -> e.setKeyword("123"));
         return null;
     }
 }

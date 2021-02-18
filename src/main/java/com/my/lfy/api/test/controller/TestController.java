@@ -104,4 +104,8 @@ public class TestController {
         return new JsonResult(BaseExceptionMsg.EXECUTE_OK);
     }
 
+    @PostMapping("/test/mybatis")
+    public JsonResult testMybatis(@RequestParam("limit") Integer limit) {
+        return new JsonResult(testService.testMybatis(limit));
+    }
 }

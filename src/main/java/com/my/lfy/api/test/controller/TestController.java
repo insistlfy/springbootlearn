@@ -53,8 +53,7 @@ public class TestController {
     @PostMapping("/02")
     @ApiOperation(value = "test-mybatis-list")
     public JsonResult test02() {
-        testService.test02();
-        return new JsonResult<>();
+        return new JsonResult<>(testService.test02());
     }
 
     @PostMapping("/03")

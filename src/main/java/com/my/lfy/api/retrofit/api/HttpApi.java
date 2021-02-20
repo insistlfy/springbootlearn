@@ -13,7 +13,7 @@ import java.util.List;
  * @author lfy
  * @date 2021/2/18
  **/
-@RetrofitClient(baseUrl = "${retrofit.base-url}")
+@RetrofitClient(baseUrl = "${retrofit.base-url}", poolName = "test1")
 public interface HttpApi {
 
     /**

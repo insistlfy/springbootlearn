@@ -3,3 +3,4 @@
 retrofit-spring-boot-starter实现了Retrofit与spring-boot框架快速整合，并且支持了诸多功能增强，极大简化开发 。
 > ### 官网API
 > > * [官网API](https://square.github.io/retrofit/)
+> > * [常用注解](https://blog.csdn.net/weixin_40611659/article/details/104985664)

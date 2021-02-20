@@ -4,6 +4,7 @@ import com.my.lfy.api.transaction.mapper.CommonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * MyBatisService
@@ -25,5 +26,14 @@ public class MyBatisService {
         log.info("first query successfully...");
 
         commonMapper.queryNameById(100022275L);
+    }
+
+    public void init() {
+        Long seq1 = commonMapper.getBookMasterSeq();
+        log.info("seq1={}.", seq1);
+
+        Long seq2 = commonMapper.getBookMasterSeq();
+        log.info("seq2={}.", seq2);
+
     }
 }

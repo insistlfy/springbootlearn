@@ -67,6 +67,21 @@ public interface CommonMapper {
      */
     List<String> queryPatientInfo(@Param("cardNoList") List<String> cardNoList);
 
+
+    /**
+     * getBookSchedulingSeq
+     *
+     * @return Long
+     */
+    Long getBookSchedulingSeq();
+
+    /**
+     * getBookMasterSeq
+     *
+     * @return Long
+     */
+    Long getBookMasterSeq();
+
     /**
      * test Cursor
      *

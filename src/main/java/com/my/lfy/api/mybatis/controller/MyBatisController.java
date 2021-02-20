@@ -30,4 +30,10 @@ public class MyBatisController {
         myBatisService.test01();
         return new JsonResult<>();
     }
+
+    @PostMapping("test02")
+    public JsonResult test02() {
+        myBatisService.init();
+        return new JsonResult<>();
+    }
 }

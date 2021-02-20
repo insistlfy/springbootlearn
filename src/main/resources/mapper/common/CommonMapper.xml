@@ -10,8 +10,7 @@
     <select id="queryNameById" resultType="java.lang.String">
         select name
         from public.pat_info
-        where id = #{patId}
-        limit 1
+        where id = #{patId} limit 1
     </select>
     <select id="queryParaValue" resultType="java.lang.String">
         select para_value
@@ -51,5 +50,12 @@
         </where>
     </select>
 
+    <select id="getBookSchedulingSeq" resultType="java.lang.Long" useCache="false" flushCache="true">
+        SELECT nextval('seq_book_scheduling'::regclass)
+    </select>
+
+    <select id="getBookMasterSeq" resultType="java.lang.Long">
+        SELECT nextval('book_master_id_seq'::regclass)
+    </select>
 
 </mapper>

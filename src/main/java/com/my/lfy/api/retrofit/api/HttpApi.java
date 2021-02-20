@@ -2,8 +2,7 @@ package com.my.lfy.api.retrofit.api;
 
 import com.github.lianjiatech.retrofit.spring.boot.annotation.RetrofitClient;
 import com.my.lfy.utils.JsonResult;
-import retrofit2.http.POST;
-import retrofit2.http.Url;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -24,4 +23,23 @@ public interface HttpApi {
      */
     @POST
     JsonResult<List<String>> test02(@Url String url);
+
+    /**
+     * test03
+     *
+     * @param name String
+     * @return JsonResult
+     */
+    @GET
+    JsonResult<String> test03(@Query("name") String name);
+
+    /**
+     * test03
+     *
+     * @param name String
+     * @return JsonResult
+     */
+    @PUT
+    JsonResult<String> test04(@Query("name") String name);
+
 }

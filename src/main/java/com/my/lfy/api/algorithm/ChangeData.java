@@ -1,4 +1,4 @@
-package com.my.lfy.api.test;
+package com.my.lfy.api.algorithm;
 
 /**
  * Test002 java
@@ -7,9 +7,9 @@ package com.my.lfy.api.test;
  * 详见: Test002.md
  *
  * @author lfy
- * @date 2020/6/29
+ * @date 2021/2/20
  **/
-public class Test002 {
+public class ChangeData {
 
     public static void main(String[] args) {
 

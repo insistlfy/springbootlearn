@@ -1,8 +1,11 @@
 package com.my.lfy.api.retrofit.controller;
 
+import com.my.lfy.api.retrofit.service.RetrofitService;
 import com.my.lfy.utils.JsonResult;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "【TEST-RETROFIT】")
 public class RetrofitController {
 
+    @Autowired
+    private RetrofitService retrofitService;
+
+    @PostMapping("test01")
     public JsonResult test01() {
+        retrofitService.test01();
         return new JsonResult<>();
     }
 }

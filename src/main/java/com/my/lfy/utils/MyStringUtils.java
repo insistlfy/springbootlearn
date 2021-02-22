@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 
 /**
  * MyStringUtils
+ * <p>
+ * StringJoiner
+ * 参考链接 ： https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247508922&idx=2&sn=f3dfc85a51d15dff5a3abd3712a9a3e8
+ * &chksm=fa4adc0bcd3d551d8397aa8e028e8a506b3640b224de44502a0e9a480517d35030b44943d468&mpshare=1&scene=1&srcid
+ * =0222eKWNtd0EfRXpga1ydoiW&sharer_sharetime=1613977110783&sharer_shareid=86689f05efe7bba4ecd64bd36ea9cc52#rd
  *
  * @author lfy
  * @date 2020/7/28

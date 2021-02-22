@@ -49,6 +49,7 @@ public interface HttpApi {
     /**
      * testGet
      *
+     * @param id   Long
      * @param name String
      * @return JsonResult
      */

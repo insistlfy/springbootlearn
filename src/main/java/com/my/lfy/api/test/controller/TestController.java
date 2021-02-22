@@ -107,4 +107,33 @@ public class TestController {
     public JsonResult testMybatis(@RequestParam("limit") Integer limit) {
         return new JsonResult(testService.testMybatis(limit));
     }
+
+    /*-------------------------------Test Retrofit--------------------------------------------*/
+
+    @PostMapping("/testPostNoParams")
+    @ApiOperation(value = "test-Retrofit-testPostNoParams")
+    public JsonResult testPostNoParams() {
+        return new JsonResult<>(testService.test02());
+    }
+
+    @PostMapping("/testPostJson")
+    @ApiOperation(value = "test-Retrofit-testPostJson")
+    public JsonResult testPostJson(@RequestBody TestModel testModel, @RequestParam("page") Integer page) {
+        testService.testPostJson(testModel, page);
+        return new JsonResult<>();
+    }
+
+    @GetMapping("/testGet/{id}")
+    @ApiOperation(value = "test-Retrofit-testGet")
+    public JsonResult testGet(@PathVariable("id") Long id, @RequestParam("name") String name) {
+        testService.testGet(id, name);
+        return new JsonResult<>();
+    }
+
+    @PutMapping("/testPut/{id}")
+    @ApiOperation(value = "test-Retrofit-testPut")
+    public JsonResult testPut(@PathVariable("id") Long id) {
+        testService.testPut(id);
+        return new JsonResult<>();
+    }
 }

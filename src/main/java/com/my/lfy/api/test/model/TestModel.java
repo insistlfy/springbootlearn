@@ -22,4 +22,8 @@ public class TestModel implements Serializable {
     private static final long serialVersionUID = -7856574730544132842L;
 
     private List<String> code;
+
+    private String name;
+
+    private Integer age;
 }

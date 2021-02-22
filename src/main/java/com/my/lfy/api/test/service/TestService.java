@@ -1,8 +1,10 @@
 package com.my.lfy.api.test.service;
 
+import com.alibaba.fastjson.JSON;
 import com.my.lfy.api.retry.service.RetryService;
 import com.my.lfy.api.springtask.SpringTaskConfig;
 import com.my.lfy.api.test.model.DicModel;
+import com.my.lfy.api.test.model.TestModel;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
 import com.my.lfy.utils.CsvUtils;
 import com.my.lfy.utils.ExcelUtils;
@@ -109,5 +111,17 @@ public class TestService {
         Cursor<DicModel> cursor = commonMapper.scan(limit);
         cursor.forEach(e -> e.setKeyword("123"));
         return null;
+    }
+
+    public void testPostJson(TestModel testModel, Integer page) {
+        log.info("Retrofit testPostJson,testModel={},page={}.", JSON.toJSONString(testModel), page);
+    }
+
+    public void testGet(Long id, String name) {
+        log.info("Retrofit testGet,id={},name ={}.", id, name);
+    }
+
+    public void testPut(Long id) {
+        log.info("Retrofit testPut,id={}.", id);
     }
 }

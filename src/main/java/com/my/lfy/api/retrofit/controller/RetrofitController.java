@@ -24,9 +24,28 @@ public class RetrofitController {
     @Autowired
     private RetrofitService retrofitService;
 
-    @PostMapping("test01")
-    public JsonResult test01() {
-        retrofitService.test01();
+    @PostMapping("testPostNoParams")
+    public JsonResult testPostNoParams() {
+        retrofitService.testPostNoParams();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("testPostJson")
+    public JsonResult testPostJson() {
+        retrofitService.testPostJson();
+        return new JsonResult<>();
+    }
+
+    @Deprecated
+    @PostMapping("testPostForm")
+    public JsonResult testPostForm() {
+        retrofitService.testPostForm();
+        return new JsonResult<>();
+    }
+
+    @PostMapping("testGet")
+    public JsonResult testGet() {
+        retrofitService.testGet();
         return new JsonResult<>();
     }
 }

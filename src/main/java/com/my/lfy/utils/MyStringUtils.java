@@ -43,11 +43,18 @@ public class MyStringUtils {
         System.out.println(str);
         System.out.println(ch);
         System.out.println(a);
+        System.out.println("=====================================");
+
+        StringJoiner joiner = new StringJoiner(",");
+        System.out.println(joiner.toString());
+        joiner.add("1").add("2").add("3");
+        System.out.println(joiner.toString());
     }
 
     public void change(String str1, char ch1[], int b) {
         b = 100;
-        str1 = "test ok";   // 等价与 str1  = new String("test ok");
+        // 等价与 str1  = new String("test ok");
+        str1 = "test ok";
         ch1[0] = 'g';
         System.out.println(str1);
     }

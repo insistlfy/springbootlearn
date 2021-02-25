@@ -64,5 +64,8 @@
 >>> * 线程隔离 -- 在线程并发的情况下，各个线程的数据之间的数据相互隔离。（避免同步方式带来的性能损失）
 >> * 与synchronized区别？ -- 并发效率的问题
 
+> ### daemon thread (守护线程)
+> > * todo
+
 > ### ThreadPool
 > * [参考链接](https://www.cnblogs.com/i-code/p/13917733.html)

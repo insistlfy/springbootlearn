@@ -54,6 +54,13 @@ public class MyStringUtils {
         System.out.println(joiner.toString());
         joiner.add("1").add("2").add("3");
         System.out.println(joiner.toString());
+        System.out.println("=====================================");
+
+        // test
+        System.out.println(Math.round(-1.5));
+        StringBuilder builder = new StringBuilder();
+        builder.append("123456");
+        System.out.println(builder.reverse().toString());
     }
 
     public void change(String str1, char ch1[], int b) {

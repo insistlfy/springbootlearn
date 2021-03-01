@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 /**
  * TestParalleStream
+ * 测试使用及使用场景
  *
  * @author lfy
  * @date 2020/8/6
@@ -33,7 +34,6 @@ public class TestParalleStream {
                 lock.unlock();
             }
         });
-
 
         System.out.println("串行执行的大小：" + list1.size());
         System.out.println("并行执行的大小：" + list2.size());

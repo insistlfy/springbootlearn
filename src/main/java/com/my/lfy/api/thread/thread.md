@@ -37,6 +37,13 @@
 > ### synchronized
 >> * 原理 : 采用`以时间换空间的方式`,只提供一份变量让不同的线程排队访问
 >> * 侧重点 : 多个线程之间访问资源的同步性
+>> * 特点 ： ① Synchronized保证原子性；(Synchronized保证只有一个线程能拿到锁，进入同步代码块；) </br> ② synchronized保证可见性
+     (执行synchronized时，对应的lock原子操作会让工作内存中从主内存中更新共享变量的值) <br/> ③ synchronized保证有序性synchronized保证有序性(synchronized后，虽然进行了重排序，保证只有一个线程会进入同步代码块，也能保证有序性)
+
+> ### volatile
+>> * 原理 : 
+>> * 侧重点 : 
+>> * 特点 ：
 
 
 > ### Notify/wait
@@ -65,7 +72,7 @@
 >> * 与synchronized区别？ -- 并发效率的问题
 
 > ### daemon thread (守护线程)
-> > * todo
+> > * todo 
 
 > ### ThreadPool
 > * [参考链接](https://www.cnblogs.com/i-code/p/13917733.html)

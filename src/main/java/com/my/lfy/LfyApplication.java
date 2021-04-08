@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * LfyApplication
@@ -17,12 +18,14 @@ import org.springframework.retry.annotation.EnableRetry;
  * @author Lifuyuan
  * @date 20-1-9
  * 描述 :
- * RefreshScope //自动刷新配置
+ * ① RefreshScope ： 自动刷新配置
+ * ② @EnableAsync : 开启Spring的异步功能
  **/
 @Slf4j
 //@RefreshScope
 @EnableCaching
 //@EnableScheduling
+@EnableAsync
 @EnableRetry
 @ServletComponentScan
 @ForestScan(basePackages = "com.my.lfy.api.forest.client")

@@ -3,6 +3,7 @@ package com.my.lfy.api.test;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -42,6 +43,12 @@ public class TestDate {
         System.out.println("==================================================");
         System.out.println("相识第一站 ：大雁搭");
         System.out.println("相识前一站 ：小雁搭");
+        System.out.println("==================================================");
+
+        LocalDate testDate = LocalDate.parse("2021-04-13");
+        LocalDate testDate1 = LocalDate.parse("2021-04-13", DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.println(testDate);
+        System.out.println(testDate1);
 
     }
 }

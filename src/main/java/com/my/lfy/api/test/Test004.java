@@ -84,7 +84,9 @@ public class Test004 {
 
         //正例
         System.out.println(goodAt.split("\\.")[0]);
+        System.out.println(name.split("|")[0]);
         System.out.println(name.split("\\|")[1]);
+        System.out.println("===================================");
 
         String str1 = "ab" + "c";
         String str2 = "abc";
@@ -93,6 +95,8 @@ public class Test004 {
         String str3 = "ab";
         String str4 = str3 + "c";
         System.out.println(str2 == str4);
+
+        StringBuffer buffer = new StringBuffer();
     }
 
 }

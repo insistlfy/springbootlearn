@@ -61,6 +61,40 @@
         </repository>
     </repositories>
 
+<!--    &lt;!&ndash;profile&ndash;&gt;-->
+<!--    <profiles>-->
+<!--        &lt;!&ndash;开发环境&ndash;&gt;-->
+<!--        <profile>-->
+<!--            <id>dev</id>-->
+<!--            <properties>-->
+<!--                <db.driver>org.postgresql.Driver</db.driver>-->
+<!--                <db.url>jdbc:postgresql://192.168.1.100:5432/local_cloud_dev</db.url>-->
+<!--                <db.username>sys</db.username>-->
+<!--                <db.password>sys</db.password>-->
+<!--            </properties>-->
+<!--            &lt;!&ndash;打包时不指定profile id，默认激活本环境&ndash;&gt;-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--        &lt;!&ndash;测试环境&ndash;&gt;-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;当系统属性存在时，自动激活profile&ndash;&gt;-->
+<!--            <activation>-->
+<!--                <property>-->
+<!--                    <name>test</name>-->
+<!--                </property>-->
+<!--            </activation>-->
+<!--            <id>test</id>-->
+<!--            <properties>-->
+<!--                <db.driver>org.postgresql.Driver</db.driver>-->
+<!--                <db.url>jdbc:postgresql://192.168.1.100:5432/local_cloud_test</db.url>-->
+<!--                <db.username>sys</db.username>-->
+<!--                <db.password>sys</db.password>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
+
     <dependencies>
 
         <dependency>
@@ -324,7 +358,26 @@
         </dependency>
 
     </dependencies>
+
+
     <build>
+<!--        <sourceDirectory>src/main/java</sourceDirectory>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/java</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                </includes>-->
+<!--                <excludes>-->
+<!--                    <exclude>**/*.java</exclude>-->
+<!--                </excludes>-->
+<!--            </resource>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>

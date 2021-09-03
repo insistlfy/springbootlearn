@@ -35,10 +35,10 @@ public class MybatisTestController {
     @PostMapping("/test")
     public Object test() {
         Map<String, Object> resultMap = new HashMap<>(4);
-        resultMap.put("getById", mybatisTestService.getById(7));
-//        resultMap.put("query", mybatisTestService.query().eq("NAME", "James"));
+        resultMap.put("getById", mybatisTestService.getById(63));
         resultMap.put("list", mybatisTestService.list());
         resultMap.put("getAll", mybatisTestService.getAll());
+//        resultMap.put("query", mybatisTestService.query().eq("NAME", "James"));
         return resultMap;
     }
 
@@ -49,7 +49,11 @@ public class MybatisTestController {
                 .age(25)
                 .build();
         mybatisTestService.save(test);
+        return "success";
+    }
 
+    @PostMapping("/saveBatch")
+    public Object saveBatch() {
         List<MybatisTest> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             MybatisTest mybatisTest = MybatisTest.builder()
@@ -71,14 +75,14 @@ public class MybatisTestController {
     @PostMapping("/page")
     public Object getByPage() {
         return PageHelper.startPage(1, 10)
-                .doSelectPage(() -> mybatisTestService.list());
+                .doSelectPageInfo(() -> mybatisTestService.list());
     }
 
     @PostMapping("/queryWrapper")
     public Object queryWrapper() {
 
         QueryWrapper<MybatisTest> qw = new QueryWrapper<>();
-        qw.select("NAME,AGE").eq("AGE", 18);
-        return mybatisTestService.list(qw);
+        qw.select("AGE,NAME").eq("AGE", 18);
+        return mybatisTestService.getMap(qw);
     }
 }

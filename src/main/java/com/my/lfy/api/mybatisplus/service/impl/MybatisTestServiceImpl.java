@@ -1,12 +1,11 @@
 package com.my.lfy.api.mybatisplus.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.my.lfy.api.mybatisplus.entity.MybatisTest;
 import com.my.lfy.api.mybatisplus.mapper.MybatisTestMapper;
 import com.my.lfy.api.mybatisplus.service.IMybatisTestService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,6 @@ public class MybatisTestServiceImpl extends ServiceImpl<MybatisTestMapper, Mybat
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
         mybatisTestMapper.deleteById(id);
     }

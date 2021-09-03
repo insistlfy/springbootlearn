@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,15 +46,15 @@ public class MybatisTestController {
     public Object save() {
         MybatisTest test = MybatisTest.builder()
                 .name("test")
-                .age(new BigDecimal("25"))
+                .age(25)
                 .build();
         mybatisTestService.save(test);
 
         List<MybatisTest> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             MybatisTest mybatisTest = MybatisTest.builder()
                     .name("test" + i)
-                    .age(new BigDecimal("25").add(new BigDecimal(i)))
+                    .age(25 + i)
                     .build();
             list.add(mybatisTest);
         }
@@ -79,8 +78,7 @@ public class MybatisTestController {
     public Object queryWrapper() {
 
         QueryWrapper<MybatisTest> qw = new QueryWrapper<>();
-        qw.select("name,age")
-                .eq("name", "James");
+        qw.select("NAME,AGE").eq("AGE", 18);
         return mybatisTestService.list(qw);
     }
 }

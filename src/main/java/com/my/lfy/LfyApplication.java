@@ -1,7 +1,6 @@
 package com.my.lfy;
 
 import com.dtflys.forest.annotation.ForestScan;
-import com.github.lianjiatech.retrofit.spring.boot.annotation.RetrofitScan;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -30,8 +29,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ServletComponentScan
 @ForestScan(basePackages = "com.my.lfy.api.forest.client")
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@MapperScan(basePackages = {"com.my.lfy.api.transaction.mapper"})
-@RetrofitScan("com.my.lfy.api.retrofit.api")
+@MapperScan(basePackages = {"com.my.lfy.api.transaction.mapper,com.my.lfy.api.mybatisplus.mapper"})
+//@RetrofitScan("com.my.lfy.api.retrofit.api")
 public class LfyApplication {
 
     public static void main(String[] args) {

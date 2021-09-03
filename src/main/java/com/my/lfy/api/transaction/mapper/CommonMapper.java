@@ -2,6 +2,7 @@ package com.my.lfy.api.transaction.mapper;
 
 import com.my.lfy.api.test.model.DicModel;
 import com.my.lfy.api.test.model.TestModel;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.cursor.Cursor;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author lfy
  * @date 2020/5/25
  **/
-@Repository
+@Mapper
 public interface CommonMapper {
 
     /**

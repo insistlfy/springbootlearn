@@ -1,0 +1,86 @@
+package com.my.lfy.api.mybatisplus.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.my.lfy.api.mybatisplus.entity.MybatisTest;
+import com.my.lfy.api.mybatisplus.service.IMybatisTestService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>
+ * test 前端控制器
+ * </p>
+ *
+ * @author Lify
+ * @since 2021-09-02
+ */
+@RestController
+@RequestMapping("/mybatisplus/mybatis-test")
+@Api(tags = "【MYBATIS-PLUS】")
+public class MybatisTestController {
+
+    @Autowired
+    private IMybatisTestService mybatisTestService;
+
+    @PostMapping("/test")
+    public Object test() {
+        Map<String, Object> resultMap = new HashMap<>(4);
+        resultMap.put("getById", mybatisTestService.getById(7));
+//        resultMap.put("query", mybatisTestService.query().eq("NAME", "James"));
+        resultMap.put("list", mybatisTestService.list());
+        resultMap.put("getAll", mybatisTestService.getAll());
+        return resultMap;
+    }
+
+    @PostMapping("/save")
+    public Object save() {
+        MybatisTest test = MybatisTest.builder()
+                .name("test")
+                .age(new BigDecimal("25"))
+                .build();
+        mybatisTestService.save(test);
+
+        List<MybatisTest> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            MybatisTest mybatisTest = MybatisTest.builder()
+                    .name("test" + i)
+                    .age(new BigDecimal("25").add(new BigDecimal(i)))
+                    .build();
+            list.add(mybatisTest);
+        }
+        mybatisTestService.saveBatch(list);
+        return "success";
+    }
+
+    @PostMapping("/delete")
+    public String delete() {
+        mybatisTestService.deleteById(7);
+        return "success";
+    }
+
+    @PostMapping("/page")
+    public Object getByPage() {
+        return PageHelper.startPage(1, 10)
+                .doSelectPage(() -> mybatisTestService.list());
+    }
+
+    @PostMapping("/queryWrapper")
+    public Object queryWrapper() {
+
+        QueryWrapper<MybatisTest> qw = new QueryWrapper<>();
+        qw.select("name,age")
+                .eq("name", "James");
+        return mybatisTestService.list(qw);
+    }
+}

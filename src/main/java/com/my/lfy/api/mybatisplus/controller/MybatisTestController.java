@@ -38,7 +38,6 @@ public class MybatisTestController {
         resultMap.put("getById", mybatisTestService.getById(63));
         resultMap.put("list", mybatisTestService.list());
         resultMap.put("getAll", mybatisTestService.getAll());
-//        resultMap.put("query", mybatisTestService.query().eq("NAME", "James"));
         return resultMap;
     }
 

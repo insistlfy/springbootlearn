@@ -8,8 +8,7 @@ import java.util.concurrent.*;
  * 比如某线程需要等待其他几个线程都执行过某个时间节点后才能继续执行 。
  * @Author: LFY
  * @Created: 2021/8/26 10:47
- * @Versions: V3.0
- * @Company: ©2021东方微银科技（西安）有限公司
+ * @Versions: V1.0
  */
 public class TestCountdownLatch {
 
@@ -26,16 +25,16 @@ public class TestCountdownLatch {
         for (int i = 0; i < COUNT; i++) {
             final int times = i;
             executorService.execute(() -> {
-                System.out.println("子线程" + times + "正在赶路");
+                System.out.println("员工" + times + "正在赶路");
                 try {
                     Thread.sleep(1000 * times);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("子线程" + times + "到公司了");
+                System.out.println("员工" + times + "到公司了");
                 //调用latch的countDown方法使计数器-1
                 latch.countDown();
-                System.out.println("子线程" + times + "开始工作");
+                System.out.println("员工" + times + "开始工作");
             });
         }
 

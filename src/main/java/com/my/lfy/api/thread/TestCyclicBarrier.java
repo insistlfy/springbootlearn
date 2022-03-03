@@ -7,8 +7,7 @@ import java.util.concurrent.*;
  * @Description: 所有线程在其他线程没有准备好之前都在被阻塞中, 等到所有线程都准备好了才继续执行
  * @Author: LFY
  * @Created: 2021/8/26 10:48
- * @Versions: V3.0
- * @Company: ©2021东方微银科技（西安）有限公司
+ * @Versions: V1.0
  */
 public class TestCyclicBarrier {
 

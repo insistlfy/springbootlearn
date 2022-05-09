@@ -80,7 +80,7 @@ function ALTITEM(value) {
     if ("" === value || null == value) {
         result = value;
     }
-    if (value.indexOf("名称") !== -1) {
+    if (value.indexOf("名称变更") !== -1 || value.indexOf("企业名称") !== -1) {
         result = "01";
     } else if (value.indexOf("企业类型") !== -1 || value.indexOf("机构类型") !== -1) {
         result = "02";
@@ -119,6 +119,7 @@ function ALTITEM(value) {
     } else {
         result = "99";
     }
+    return result;
 }
 
 
@@ -184,7 +185,7 @@ function test2(value) {
     console.log(result);
 }
 
-test1("50.00%");
+console.log(ALTITEM("名称变更"));
 
 
 

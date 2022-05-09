@@ -1,6 +1,8 @@
 package com.my.lfy.api.thread;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Test001
@@ -10,7 +12,7 @@ import java.util.concurrent.Callable;
  **/
 public class Test001 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
 
         Thread d = new ThreadD();
@@ -20,6 +22,10 @@ public class Test001 {
         d.start();
         a.start();
         c.start();
+        FutureTask futureTask = new FutureTask(new CallableC());
+        new Thread(futureTask).start();
+        System.out.println("futureTask: " + futureTask.get());
+
     }
 }
 

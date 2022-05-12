@@ -1,7 +1,10 @@
 package com.my.lfy.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.my.lfy.exception.ServiceException;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -48,19 +51,32 @@ public class MyStringUtils {
         System.out.println(str);
         System.out.println(ch);
         System.out.println(a);
-        System.out.println("=====================================");
+        System.out.println("=============change========================");
 
         StringJoiner joiner = new StringJoiner(",");
         System.out.println(joiner.toString());
         joiner.add("1").add("2").add("3");
         System.out.println(joiner.toString());
-        System.out.println("=====================================");
+        System.out.println("==============joiner=======================");
 
         // test
         System.out.println(Math.round(-1.5));
         StringBuilder builder = new StringBuilder();
         builder.append("123456");
         System.out.println(builder.reverse().toString());
+        System.out.println(reverse("123456"));
+        System.out.println(reverseNew("123456"));
+        System.out.println("================builder.reverse()=====================");
+
+        String[] strArr = {"Hello", "World"};
+        List<String> strList = Arrays.asList(strArr);
+        System.out.println(deRepeat(strList));
+        System.out.println(deRepeat(strList).indexOf("H"));
+        System.out.println("================deRepeat=====================");
+
+        System.out.println(JSON.toJSONString("hello".split("")));
+        System.out.println(deRepeatNew(strList));
+        System.out.println("================deRepeatNew=====================");
     }
 
     public void change(String str1, char ch1[], int b) {
@@ -214,5 +230,53 @@ public class MyStringUtils {
         source = source.replace(String.valueOf(targetChar), "");
         int newLength = source.length();
         return originLength - newLength;
+    }
+
+    /**
+     * 字符串去重
+     *
+     * @param source String
+     * @return String
+     */
+    public static String deRepeat(@NotBlank String source) {
+        StringBuilder builder = new StringBuilder();
+        for (String str : source.split("")) {
+            if (builder.indexOf(str) < 0) {
+                builder.append(str);
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
+     * 对数组中的字符串去重
+     * 假如我们有这样一个需求给定单词列表["Hello","World"]，你想要返回列表HeloWrd
+     *
+     * @param sourceList String[]
+     * @return String
+     */
+    public static String deRepeat(@NotNull List<String> sourceList) {
+        StringBuilder builder = new StringBuilder();
+        sourceList.forEach(e -> {
+            for (char c : e.toCharArray()) {
+                builder.append(c);
+            }
+        });
+        return deRepeat(builder.toString());
+    }
+
+    /**
+     * 对数组中的字符串去重
+     * 假如我们有这样一个需求给定单词列表["Hello","World"]，你想要返回列表["H","e","l", "o","W","r","d"]
+     *
+     * @param sourceList List<String>
+     * @return List<String>
+     */
+    public static List<String> deRepeatNew(@NotNull List<String> sourceList) {
+        return sourceList.stream()
+                .map(e -> e.split(""))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

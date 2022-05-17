@@ -23,7 +23,7 @@
         <postgresql.version>42.2.5</postgresql.version>
         <mybatis-spring.version>2.1.2</mybatis-spring.version>
         <pagehelper-spring.version>1.2.11</pagehelper-spring.version>
-        <fastjson.version>1.2.69</fastjson.version>
+        <fastjson.version>2.0.3.graal</fastjson.version>
         <druid-spring.version>1.2.6</druid-spring.version>
         <springfox-swagger-ui.version>2.8.0</springfox-swagger-ui.version>
         <apache-collections.version>3.2.2</apache-collections.version>

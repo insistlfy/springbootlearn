@@ -38,12 +38,13 @@ public final class DESUtil extends AbstractCipher implements Serializable {
     }
 
     @Override
-    public String encrypt(String data) {
+    public String encrypt(String... paras) {
+        String data = paras[0];
         check(data);
         try {
             SecretKeySpec key = getSecretKeySpec();
             // 创建密码器
-            Cipher cipher = Cipher.getInstance("DES");
+            Cipher cipher = Cipher.getInstance(DES);
             byte[] byteContent = data.getBytes(StandardCharsets.UTF_8);
             // 初始化
             cipher.init(Cipher.ENCRYPT_MODE, key);
@@ -56,14 +57,15 @@ public final class DESUtil extends AbstractCipher implements Serializable {
     }
 
     @Override
-    public String decrypt(String data) {
+    public String decrypt(String... paras) {
+        String data = paras[0];
         check(data);
         try {
             //先用base64解密
             byte[] encrypted = decode(data);
             SecretKeySpec key = getSecretKeySpec();
             // 创建密码器
-            Cipher cipher = Cipher.getInstance("DES");
+            Cipher cipher = Cipher.getInstance(DES);
             // 初始化
             cipher.init(Cipher.DECRYPT_MODE, key);
             // 解密
@@ -76,11 +78,11 @@ public final class DESUtil extends AbstractCipher implements Serializable {
     }
 
     private SecretKeySpec getSecretKeySpec() throws NoSuchAlgorithmException {
-        KeyGenerator kGen = KeyGenerator.getInstance("DES");
+        KeyGenerator kGen = KeyGenerator.getInstance(DES);
         kGen.init(56, new SecureRandom(KEY.getBytes()));
         SecretKey secretKey = kGen.generateKey();
         byte[] enCodeFormat = secretKey.getEncoded();
-        return new SecretKeySpec(enCodeFormat, "DES");
+        return new SecretKeySpec(enCodeFormat, DES);
     }
 
 }

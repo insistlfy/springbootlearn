@@ -33,7 +33,8 @@ public final class AESUtil extends AbstractCipher implements Serializable {
     }
 
     @Override
-    public String encrypt(String data) {
+    public String encrypt(String... paras) {
+        String data = paras[0];
         check(data);
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
@@ -45,7 +46,7 @@ public final class AESUtil extends AbstractCipher implements Serializable {
             }
             byte[] plaintext = new byte[plaintextLength];
             System.arraycopy(dataBytes, 0, plaintext, 0, dataBytes.length);
-            SecretKeySpec keyspec = new SecretKeySpec(KEY.getBytes(), "AES");
+            SecretKeySpec keyspec = new SecretKeySpec(KEY.getBytes(), AES);
             // CBC模式，需要一个向量iv，可增加加密算法的强度
             IvParameterSpec ivSpec = new IvParameterSpec(IV.getBytes());
             cipher.init(Cipher.ENCRYPT_MODE, keyspec, ivSpec);
@@ -59,15 +60,16 @@ public final class AESUtil extends AbstractCipher implements Serializable {
     }
 
     @Override
-    public String decrypt(String data) {
+    public String decrypt(String... paras) {
+        String data = paras[0];
         check(data);
         try {
             //先用base64解密
             byte[] encrypted = decode(data);
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-            SecretKeySpec keyspec = new SecretKeySpec(KEY.getBytes(), "AES");
-            IvParameterSpec ivspec = new IvParameterSpec(IV.getBytes());
-            cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
+            SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), AES);
+            IvParameterSpec ivSpec = new IvParameterSpec(IV.getBytes());
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
             byte[] original = cipher.doFinal(encrypted);
             String originalString = new String(original);
             return originalString.trim();

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * TestThreadLocal
+ * ThreadLocalMap
  *
  * @author lfy
  * @date 2020/8/9
@@ -37,6 +38,21 @@ public class TestThreadLocal {
          * Example two
          */
         new ClassA().process();
+
+
+        //ThreadLocal不支持继承性
+        ThreadLocal<String> stringThreadLocal = new ThreadLocal<>();
+        // InheritableThreadLocal支持继承
+        InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
+        stringThreadLocal.set("main");
+        inheritableThreadLocal.set("main");
+        new Thread(() -> {
+            System.out.println("ThreadLocal-子线程中的本地变量值：" + stringThreadLocal.get());
+            System.out.println("InheritableThreadLocal-子线程中的本地变量值：" + inheritableThreadLocal.get());
+        }).start();
+        System.out.println("ThreadLocal-主线程中的本地变量值：" + stringThreadLocal.get());
+        System.out.println("InheritableThreadLocal-主线程中的本地变量值：" + inheritableThreadLocal.get());
+
     }
 
 

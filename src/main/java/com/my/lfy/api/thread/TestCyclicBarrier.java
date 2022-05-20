@@ -1,14 +1,17 @@
 package com.my.lfy.api.thread;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.*;
 
 /**
- * @ClassName: TestCyclicBarrier
+ * @FileName: TestCyclicBarrier
  * @Description: 所有线程在其他线程没有准备好之前都在被阻塞中, 等到所有线程都准备好了才继续执行
  * @Author: LFY
  * @Created: 2021/8/26 10:48
  * @Versions: V1.0
  */
+@Slf4j
 public class TestCyclicBarrier {
 
     private static final Integer COUNT = 10;
@@ -34,10 +37,9 @@ public class TestCyclicBarrier {
                 System.out.println("子线程" + times + "准备好了");
                 try {
                     cyclicBarrier.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException | BrokenBarrierException e) {
+                    log.error("cyclicBarrier.await() --- error, please retry...");
+                    return;
                 }
                 System.out.println("子线程" + times + "开始跑了");
             });

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.*;
+
 /**
  * TestThreadLocal
  * ThreadLocalMap
@@ -13,32 +15,34 @@ import lombok.extern.slf4j.Slf4j;
  * @author lfy
  * @date 2020/8/9
  **/
+@Data
 public class TestThreadLocal {
 
-    private ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static final Integer SIZE = 5;
+
+    private static ExecutorService executorService = new ThreadPoolExecutor(10, 50, 1000, TimeUnit.MILLISECONDS,
+            new LinkedBlockingDeque<>(), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
 
     public static void main(String[] args) {
 
-        /**
-         * Example one
-         */
+        // Example one
         TestThreadLocal testThreadLocal = new TestThreadLocal();
-
-        for (int i = 0; i < 5; i++) {
-            new Thread(() -> {
+        for (int i = 0; i < SIZE; i++) {
+            executorService.execute(() -> {
                 testThreadLocal.setContext(Thread.currentThread().getName() + "的数据");
                 System.out.println("------------------------------");
                 String context = testThreadLocal.getContext();
                 System.out.println(Thread.currentThread().getName() + ":" + context);
-            }).start();
+            });
         }
+        // 避免造成内存泄露
+        threadLocal.remove();
 
-
-        /**
-         * Example two
-         */
+        //Example two
         new ClassA().process();
-
+        //避免造成内存泄露
+        UserContextHolder.remove();
 
         //ThreadLocal不支持继承性
         ThreadLocal<String> stringThreadLocal = new ThreadLocal<>();
@@ -46,12 +50,13 @@ public class TestThreadLocal {
         InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
         stringThreadLocal.set("main");
         inheritableThreadLocal.set("main");
-        new Thread(() -> {
+        executorService.execute(() -> {
             System.out.println("ThreadLocal-子线程中的本地变量值：" + stringThreadLocal.get());
             System.out.println("InheritableThreadLocal-子线程中的本地变量值：" + inheritableThreadLocal.get());
-        }).start();
+        });
         System.out.println("ThreadLocal-主线程中的本地变量值：" + stringThreadLocal.get());
         System.out.println("InheritableThreadLocal-主线程中的本地变量值：" + inheritableThreadLocal.get());
+        executorService.shutdown();
 
     }
 
@@ -101,6 +106,10 @@ class ClassC {
 
 class UserContextHolder {
     public static ThreadLocal<User> holder = new ThreadLocal<>();
+
+    public static void remove() {
+        holder.remove();
+    }
 }
 
 @Data

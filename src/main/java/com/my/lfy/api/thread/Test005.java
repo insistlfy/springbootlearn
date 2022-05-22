@@ -2,11 +2,9 @@ package com.my.lfy.api.thread;
 
 /**
  * @FileName: Test005
- * @Description：TODO
  * @Author: Lify
  * @Created: 2021/10/13 18:31
  * @Versions: V3.0
- * @Company: ©2021东方微银科技（西安）有限公司
  */
 public class Test005 {
 

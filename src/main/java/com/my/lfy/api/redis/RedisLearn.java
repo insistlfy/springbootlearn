@@ -33,8 +33,9 @@ public class RedisLearn {
         // Test Connect
         JedisPool pool = new JedisPool();
         Jedis jedis = pool.getResource();
+        jedis.auth("123456");
         log.info("Redis connect success...");
-        log.info("Redis  is running...{}.", jedis.ping());
+        log.info("Redis is running...{}.", jedis.ping());
         System.out.println();
 
         //Test String
@@ -57,12 +58,16 @@ public class RedisLearn {
 
         //Test Sorted Set
         jedis.zadd("sortedSet", 1, "Hello");
-        jedis.zadd("sortedSet", 2, "Redis");
+        jedis.zadd("sortedSet", 8, "Redis");
+        jedis.zadd("sortedSet", 5, "World");
 
-        //rank
-        log.info("redis <---> Sorted Set ---->{}", jedis.zrevrank("sortedSet", "Hello"));
+        //rank  ZREVRANK命令用于返回有序集 KEY中成员 member 的排名。
+        // 其中有序集成员按 score 值递减 (从大到小)顺序排列。 排名以 0 为底，也就是说， score 值最大的成员排名为 0 。
+        // 使用 ZRANK 命令可以获得成员按 score 值递增 (从小到大)排列的排名。
+        log.info("redis zrevrank<---> Sorted Set ---->{}", jedis.zrevrank("sortedSet", "Hello"));
+        log.info("redis zrank<---> Sorted Set ---->{}", jedis.zrank("sortedSet", "Hello"));
         //score
-        log.info("redis <---> Sorted Set ---->{}.", jedis.zscore("sortedSet", "Redis"));
+        log.info("redis zscore <---> Sorted Set ---->{}.", jedis.zscore("sortedSet", "Redis"));
         System.out.println();
 
         //Test Hash
@@ -182,6 +187,7 @@ class SubChannel implements Runnable {
     public void run() {
         log.info("starting subscribe redis message.");
         Jedis jedis = jedisPool.getResource();
+        jedis.auth("123456");
         jedis.subscribe(subscriber, "redisChat");
     }
 

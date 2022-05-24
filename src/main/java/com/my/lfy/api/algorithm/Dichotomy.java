@@ -55,7 +55,7 @@ public class Dichotomy {
         while (-1 == flag && min <= max) {
             int mid = (min + max) / 2;
 
-            if (array[min] == value) {
+            if (array[mid] == value) {
                 flag = mid;
                 System.out.println("查找成功,目标数据索引为 : " + flag);
             } else if (array[mid] > value) {

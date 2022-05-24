@@ -37,9 +37,9 @@ public class TestCipher {
         RASUtil.RsaKey rsaKey = RASUtil.createKeys(KEY_SIZE);
         System.out.println("publicKey: " + rsaKey.getPublicKey());
         System.out.println("privateKey: " + rsaKey.getPrivateKey());
-        String ras = RASUtil.getInstance().encrypt(data, rsaKey.getPublicKey());
-        System.out.println("【RSA-公钥加密后:】" + ras);
-        System.out.println("【RSA-私钥解密后:】" + RASUtil.getInstance().decrypt(ras, rsaKey.getPrivateKey()));
+        String rsa = RASUtil.getInstance().encrypt(data, rsaKey.getPublicKey());
+        System.out.println("【RSA-公钥加密后:】" + rsa);
+        System.out.println("【RSA-私钥解密后:】" + RASUtil.getInstance().decrypt(rsa, rsaKey.getPrivateKey()));
         System.out.println("========================================================");
     }
 }

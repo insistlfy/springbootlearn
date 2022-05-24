@@ -26,9 +26,7 @@ import java.security.spec.X509EncodedKeySpec;
  * @CreateDate: 2022/5/19 18:07
  **/
 @Slf4j
-public final class RASUtil extends AbstractCipher implements Serializable {
-
-    private static final long serialVersionUID = -821503608896159173L;
+public final class RASUtil extends AbstractCipher {
 
     private volatile static RASUtil rasUtil;
 

@@ -20,9 +20,7 @@ import java.util.Base64;
  * @CreateDate: 2022/5/19 18:10
  **/
 @Slf4j
-public abstract class AbstractCipher implements Serializable {
-
-    private static final long serialVersionUID = -516539731886313387L;
+public abstract class AbstractCipher {
 
     /**
      * 加密算法类型

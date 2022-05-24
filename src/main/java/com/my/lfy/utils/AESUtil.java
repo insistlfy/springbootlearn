@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.Serializable;
 
 /**
  * @FileName: AESUtil
@@ -14,7 +13,7 @@ import java.io.Serializable;
  * @CreateDate: 2022/5/19 18:08
  **/
 @Slf4j
-public final class AESUtil extends AbstractCipher implements Serializable {
+public final class AESUtil extends AbstractCipher {
 
     private volatile static AESUtil aesUtil;
 

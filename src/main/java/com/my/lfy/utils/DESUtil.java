@@ -6,7 +6,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -18,7 +17,7 @@ import java.security.SecureRandom;
  * @CreateDate: 2022/5/19 18:07
  **/
 @Slf4j
-public final class DESUtil extends AbstractCipher implements Serializable {
+public final class DESUtil extends AbstractCipher {
 
     private volatile static DESUtil desUtil;
 

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * describe : 求两个数的最小公倍数
+ * [a,b] * (a,b) = a * b
  *
  * @author lfy
  * @date 2020/7/24
@@ -19,7 +20,7 @@ public class LeastCommonMultiple {
     }
 
     public static int min(int a, int b) {
-        int max = GreatestCommonDivisor.getValue2(1, 2);
+        int max = GreatestCommonDivisor.getValue2(a, b);
         return a * b / max;
     }
 }

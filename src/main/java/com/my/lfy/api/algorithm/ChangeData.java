@@ -13,11 +13,12 @@ public class ChangeData {
 
     public static void main(String[] args) {
 
-        lowSwap();
+        int a = 5, b = 10;
+        lowSwap(a, b);
 
-        midSwap();
+        midSwap(a, b);
 
-        highSwap();
+        highSwap(a, b);
 
         int x = 1 ^ 2;
         int y = 1 & 2;
@@ -30,9 +31,7 @@ public class ChangeData {
     /**
      * 创建一个临时变量存储两个中某个值
      */
-    public static void lowSwap() {
-        int a = 100;
-        int b = 50;
+    public static void lowSwap(int a, int b) {
         System.out.println("第一种方法交换前 : a = " + a);
         System.out.println("第一种方法交换前 : b = " + b);
 
@@ -48,9 +47,7 @@ public class ChangeData {
     /**
      * 两数相加保存和值
      */
-    public static void midSwap() {
-        int a = 100;
-        int b = 50;
+    public static void midSwap(int a, int b) {
         System.out.println("第二种方法交换前 : a = " + a);
         System.out.println("第二种方法交换前 : b = " + b);
 
@@ -66,9 +63,7 @@ public class ChangeData {
     /**
      * 两数异或保存两数状态
      */
-    public static void highSwap() {
-        int a = 100;
-        int b = 50;
+    public static void highSwap(int a, int b) {
         System.out.println("第三种方法交换前 : a = " + a);
         System.out.println("第三种方法交换前 : b = " + b);
 

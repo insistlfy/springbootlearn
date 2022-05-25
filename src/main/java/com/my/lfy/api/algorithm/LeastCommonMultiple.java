@@ -16,11 +16,11 @@ public class LeastCommonMultiple {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
         int b = scanner.nextInt();
-        System.out.println("a : " + a + ", b : " + b + "最小公倍数是 : " + min(a, b));
+        System.out.println("a : " + a + ", b : " + b + "最小公倍数是 : " + lcm(a, b));
     }
 
-    public static int min(int a, int b) {
-        int max = GreatestCommonDivisor.getValue2(a, b);
+    public static int lcm(int a, int b) {
+        int max = GreatestCommonDivisor.gcd2(a, b);
         return a * b / max;
     }
 }

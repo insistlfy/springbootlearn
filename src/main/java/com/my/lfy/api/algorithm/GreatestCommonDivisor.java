@@ -11,9 +11,9 @@ public class GreatestCommonDivisor {
     public static void main(String[] args) {
 
         int a = 12, b = 18;
-        System.out.println(a + "和" + b + "最大公约数：" + getValue1(a, b));
-        System.out.println(a + "和" + b + "最大公约数：" + getValue2(a, b));
-        System.out.println(a + "和" + b + "最小公倍数：" + LeastCommonMultiple.min(a, b));
+        System.out.println(a + "和" + b + "最大公约数：" + gcd1(a, b));
+        System.out.println(a + "和" + b + "最大公约数：" + gcd2(a, b));
+        System.out.println(a + "和" + b + "最小公倍数：" + LeastCommonMultiple.lcm(a, b));
     }
 
     /**
@@ -23,7 +23,7 @@ public class GreatestCommonDivisor {
      * @param b int
      * @return int
      */
-    public static int getValue1(int a, int b) {
+    public static int gcd1(int a, int b) {
         //交换两数
         if (a < b) {
             ChangeData.highSwap(a, b);
@@ -31,7 +31,7 @@ public class GreatestCommonDivisor {
         if (a % b == 0) {
             return b;
         }
-        return getValue1(b, a % b);
+        return gcd1(b, a % b);
     }
 
     /**
@@ -41,12 +41,12 @@ public class GreatestCommonDivisor {
      * @param b int
      * @return int
      */
-    public static int getValue2(int a, int b) {
+    public static int gcd2(int a, int b) {
         int big = Math.max(a, b);
         int small = Math.min(a, b);
         if (big == small) {
             return small;
         }
-        return getValue2(big - small, small);
+        return gcd2(big - small, small);
     }
 }

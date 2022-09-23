@@ -19,7 +19,7 @@ public class UserServiceStaticProxy implements UserService {
     @Override
     public void sayHello() {
         before();
-        // 实际调用
+        // 实际调用  真实主题角色
         userService.sayHello();
         after();
     }

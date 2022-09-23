@@ -58,4 +58,8 @@
         SELECT nextval('book_master_id_seq'::regclass)
     </select>
 
+    <select id="test" resultType="java.util.Map">
+        select * from PFM_PRODUCT where PRODUCT_CODE = #{productCode}
+    </select>
+
 </mapper>

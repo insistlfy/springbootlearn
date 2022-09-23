@@ -1,10 +1,12 @@
 package com.my.lfy.api.mybatis.service;
 
+import com.alibaba.fastjson.JSON;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
 
 /**
  * MyBatisService
@@ -35,5 +37,10 @@ public class MyBatisService {
         Long seq2 = commonMapper.getBookMasterSeq();
         log.info("seq2={}.", seq2);
 
+    }
+
+    public void test03() {
+        Map<String, Object> map = commonMapper.test("PER01A0103");
+        log.info("data is {}", JSON.toJSONString(map));
     }
 }

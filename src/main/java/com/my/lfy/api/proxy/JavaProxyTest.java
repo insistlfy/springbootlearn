@@ -16,6 +16,16 @@ public class JavaProxyTest {
     public static void main(String[] args) {
         //看看JDK生成的自动代理类
         System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+        //产生代理对象
+        UserService iUser = (UserService) Proxy.newProxyInstance(UserServiceProxy.class.getClassLoader(),
+                new Class[]{UserService.class},
+                new UserServiceProxy(new UserServiceImpl()));
+        iUser.sayHello();
+        System.out.println("===================================================");
+        // 静态代理
+        UserServiceStaticProxy staticProxy = new UserServiceStaticProxy(new UserServiceImpl());
+        staticProxy.sayHello();
+
     }
 
     @Test

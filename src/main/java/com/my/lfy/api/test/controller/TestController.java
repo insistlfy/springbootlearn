@@ -1,6 +1,7 @@
 package com.my.lfy.api.test.controller;
 
 import com.my.lfy.api.test.model.TestModel;
+import com.my.lfy.api.test.service.ITestService;
 import com.my.lfy.api.test.service.MyFactory;
 import com.my.lfy.api.test.service.TestService;
 import com.my.lfy.api.transaction.mapper.CommonMapper;
@@ -41,6 +42,17 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private List<ITestService> testServiceList;
+
+
+    @PostMapping("/bean")
+    @ApiOperation(value = "test-bean")
+    public JsonResult testBean() {
+        testServiceList.forEach(e -> System.out.println(e));
+        return new JsonResult<>();
+    }
 
     @PostMapping()
     @ApiOperation(value = "test-01")
@@ -134,6 +146,13 @@ public class TestController {
     @ApiOperation(value = "test-Retrofit-testPut")
     public JsonResult testPut(@PathVariable("id") Long id) {
         testService.testPut(id);
+        return new JsonResult<>();
+    }
+
+    @PutMapping("/arthas")
+    @ApiOperation(value = "test-arthas")
+    public JsonResult testArthas() {
+        log.info("test atthas...");
         return new JsonResult<>();
     }
 }

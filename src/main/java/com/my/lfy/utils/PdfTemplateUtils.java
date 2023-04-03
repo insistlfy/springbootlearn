@@ -4,9 +4,13 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.Tolerate;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +18,13 @@ public class PdfTemplateUtils {
 
     public static void main(String[] args) throws IOException {
         ByteArrayOutputStream bos = getData();
-        OutputStream os = new FileOutputStream("D:/temp/test10.pdf");
+        OutputStream os = new FileOutputStream("D:/tmp/test10.pdf");
         os.write(bos.toByteArray());
         os.flush();
     }
 
 
-    public static void fill(){
+    public static void fill() {
         // 模板文件路径
         String inputFileName = "D:/temp/test(1).pdf";
         // 生成的文件路径
@@ -72,16 +76,22 @@ public class PdfTemplateUtils {
             bos = new ByteArrayOutputStream();
             PdfStamper stamper = new PdfStamper(reader, bos);
             AcroFields form = stamper.getAcroFields();
-            Map<String, String> map = new HashMap<>();
-            map.put("name", "111");
-            map.put("date", "111");
+//            Map<String, String> map = new HashMap<>();
+//            map.put("name", "张三");
+//            map.put("date", "2022-11-24");
+//
+//            fillPdfCellForm(map, form);
 
-            fillPdfCellForm(map, form);
+            FillData fillData = FillData.builder()
+                    .name("张三")
+                    .date("2022-11-24")
+                    .build();
+            fill(fillData,form);
 
             // true代表生成的PDF文件不可编辑
             stamper.setFormFlattening(true);
             stamper.close();
-        } catch (IOException | DocumentException e) {
+        } catch (IOException | DocumentException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
@@ -96,4 +106,25 @@ public class PdfTemplateUtils {
         }
     }
 
+    private static <T> void fill(T fillData, AcroFields form) throws IllegalAccessException, DocumentException, IOException {
+        Field[] declaredFields = fillData.getClass().getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            declaredField.setAccessible(true);
+            form.setField(declaredField.getName(), String.valueOf(declaredField.get(fillData)));
+        }
+    }
+
+    @Data
+    @Builder
+    public static class FillData implements Serializable {
+
+        private static final long serialVersionUID = -8580302177661211873L;
+        private String name;
+
+        private String date;
+
+        @Tolerate
+        public FillData() {
+        }
+    }
 }

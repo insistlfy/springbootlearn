@@ -118,7 +118,7 @@ public class CreateTableUtils {
      */
     public List<Map<String, Object>> readExcel() {
         List<Map<String, Object>> result = new ArrayList<>();
-        File file = new File("D:\\Work\\3.0-长银担保\\合作方管理\\合作方管理表设计_20221009 - 副本.xlsx");
+        File file = new File("D:\\Work\\3.0-长银担保\\规则管理表设计_20221020.xlsx");
         Workbook book = WorkbookUtil.createBook(file);
         int sheetNum = book.getNumberOfSheets();
         for (int i = 0; i < sheetNum; i++) {

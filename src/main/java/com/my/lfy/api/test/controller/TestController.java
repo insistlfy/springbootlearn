@@ -152,7 +152,7 @@ public class TestController {
     @PutMapping("/arthas")
     @ApiOperation(value = "test-arthas")
     public JsonResult testArthas() {
-        log.info("test atthas...");
+        log.info("test arthas...");
         return new JsonResult<>();
     }
 }

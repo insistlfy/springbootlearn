@@ -10,9 +10,24 @@ import java.util.List;
 /**
  * SortAlgorithm
  * 排序算法练习
+ * 1、冒泡排序
+ * ① 原理：相邻的两个单位,比较存储的数据， 如果第一个单元的数据较大,就将两个相邻单元,交换存储数据
+ * ② 过程：从起始单元开始比较,第一次循环,会选择出一个最大值,放在数组所有单元的最后， 之后,每次循环,
+ * 都会比较出一个本次循环的最大值,放在当前参与比较单元的最后，之前已经比较选出的单元,不会参与下一次比较
+ * <p>
+ * 2、选择排序
+ * ① 原理：先定义循环的起始位置默认为最小值所在位置
+ * ② 过程：从起始位置下一个位置开始,执行循环，如果有位置上的数值,小于,存储索引位置上的数值，就存储这个位置的索引值，循环结束,
+ * 比较存储的索引,是否是起始位置索引，如果不是,就交换两个位置上的数值，会将本次循环的最小值,放置在循环的起始位置上，
+ * 再执行多次循环,完成排序
+ * <p>
+ * 3、快速排序：
+ * ① 原理：
+ * <p>
+ * 学习连接：https://blog.csdn.net/LPKJJSHSSB/article/details/105007162
  *
  * @author lfy
- * @date 2021/3/1
+ * @CreateDate: 2021/3/1
  **/
 public class SortAlgorithm {
 
@@ -47,14 +62,14 @@ public class SortAlgorithm {
         }
         // 不改变原数组的值
         int[] arr = Arrays.copyOf(sourceArr, sourceArr.length);
-        // 外层循环控制循环的趟数
+        // 外层循环控制循环的趟数， 最后一个元素不用再循环比较
         for (int i = 0; i < arr.length - 1; i++) {
-            //内层循环比较相邻的两个数
-            for (int j = 0; j < arr.length - 1; j++) {
+            //内层循环比较相邻的两个数，已经比较过的最大值，无需再参与循环
+            for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    arr[j + 1] = arr[j] ^ arr[j + 1];
-                    arr[j] = arr[j] ^ arr[j + 1];
-                    arr[j + 1] = arr[j] ^ arr[j + 1];
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
         }
@@ -74,14 +89,26 @@ public class SortAlgorithm {
         // 不改变原数组的值
         int[] arr = Arrays.copyOf(sourceArr, sourceArr.length);
         // 外层循环的每一个元素和内循环的数进行比较
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length - 1; j++) {
-                if (arr[i] < arr[j]) {
-                    arr[i] = arr[i] ^ arr[j];
-                    arr[j] = arr[i] ^ arr[j];
-                    arr[i] = arr[i] ^ arr[j];
+        for (int i = 0; i < arr.length - 1; i++) {
+
+            //初始化一个变量，用来记录最小数字的下标。初始默认假设第一个数字就是最小数字
+            int minIndex = i;
+
+            //第二个循环，通过比较获取数组中最小的数字的下标。
+            for (int j = i + 1; j < arr.length; j++) {
+                //如果找到更小的数字
+                if (arr[minIndex] > arr[j]) {
+                    //将minIndex变量的值修改为新的最小数字的下标。
+                    minIndex = j;
                 }
             }
+            //将最小的数字替换到第一个位置，将第一个位置的数字放到最小数字原来的位置
+            if (minIndex != i) {
+                int temp = arr[minIndex];
+                arr[minIndex] = arr[i];
+                arr[i] = temp;
+            }
+
         }
         return arr;
     }

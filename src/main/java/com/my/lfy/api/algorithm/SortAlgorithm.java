@@ -22,9 +22,11 @@ import java.util.List;
  * 再执行多次循环,完成排序
  * <p>
  * 3、快速排序：
- * ① 原理：
+ * ① 原理：快速排序是基于二分的思想,对冒泡排序的一种改进。主要思想是确立一个基数,将小于基数的数放到基数左边,
+ * 大于基数的数字放到基数的右边,然后在对这两部分进一步排序,从而实现对数组的排序
  * <p>
- * 学习连接：https://blog.csdn.net/LPKJJSHSSB/article/details/105007162
+ * 学习连接1：https://blog.csdn.net/LPKJJSHSSB/article/details/105007162
+ * 学习连接2：https://www.jb51.net/article/262303.htm
  *
  * @author lfy
  * @CreateDate: 2021/3/1
@@ -48,6 +50,8 @@ public class SortAlgorithm {
         System.out.println("排序前：" + JSON.toJSONString(arr1));
         System.out.println("快速排序后：" + JSON.toJSONString(quickSort(arr, 5)));
         System.out.println("快速排序后：" + JSON.toJSONString(quickSort(arr1, 4)));
+        System.out.println("=================================================");
+        System.out.println("新快速排序后：" + JSON.toJSONString(quickSort(arr1, 0, arr.length - 1)));
     }
 
     /**
@@ -143,5 +147,45 @@ public class SortAlgorithm {
         int[] bubbleRightSort = bubbleSort(rightArr);
 
         return ArrayUtils.addAll(bubbleLeftSort, bubbleRightSort);
+    }
+
+    /**
+     * 快速排序 TODO
+     *
+     * @param sourceArr 待排序数组
+     * @param left      int
+     * @param right     int
+     * @return int[]
+     */
+    public static int[] quickSort(int[] sourceArr, int left, int right) {
+        // 递归的出口必须仔细考虑清楚，否则就会陷入无穷循环从而使栈溢出
+        if (left >= right) {
+            return sourceArr;
+        }
+        // 不改变原数组的值
+        int[] arr = Arrays.copyOf(sourceArr, sourceArr.length);
+        int pivot = arr[left];
+        int i = left;
+        int j = right;
+        while (i < j) {
+            // 这里如果pivot 选在左侧，就要先从右侧开始遍历，反之则先从左侧开始
+            while (arr[j] > pivot && i < j) {
+                j--;
+            }
+            // 找到比基准小的数换到左侧去
+            arr[i] = arr[j];
+            while (arr[i] < pivot && i < j) {
+                i++;
+            }
+            // 找到比基准大的数换到右侧去
+            arr[j] = arr[i];
+        }
+        // 最后将基准放到中间位置
+        arr[i] = pivot;
+        //  递归快排左侧数列
+        quickSort(arr, left, i - 1);
+        // 递归遍历右侧数列
+        quickSort(arr, i + 1, right);
+        return arr;
     }
 }

@@ -1,6 +1,6 @@
 package com.my.lfy.api.redis;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import cn.hutool.core.thread.NamedThreadFactory;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -28,7 +28,7 @@ public class RedisLearn {
 
         //线程池
         ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 50, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>()
-                , new ThreadFactoryBuilder().setNameFormat("REDIS--%d").build());
+                , new NamedThreadFactory("REDIS--", false));
 
         // Test Connect
         JedisPool pool = new JedisPool();

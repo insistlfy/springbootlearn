@@ -1,6 +1,6 @@
 package com.my.lfy.config.threadpool;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import cn.hutool.core.thread.NamedThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,7 +32,7 @@ public class TreadPoolConfig {
     @Bean
     public ExecutorService myThreadPool() {
         //线程工场
-        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("MY-THREAD-%d").build();
+        ThreadFactory threadFactory = new NamedThreadFactory("MY-THREAD-", false);
 
         //线程池创建并返回
         return new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALINE_TIME, TimeUnit.SECONDS,

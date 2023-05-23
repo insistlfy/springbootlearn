@@ -1,6 +1,6 @@
 package com.my.lfy.api.thread;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import cn.hutool.core.thread.NamedThreadFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class TestNotifyAndWait {
 
     public static void main(String[] args) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 50, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>()
-                , new ThreadFactoryBuilder().setNameFormat("线程通信测试--%d").build());
+                , new NamedThreadFactory("线程通信测试--", false));
         TaskQueue taskQueue = new TaskQueue();
 
 //        executor.execute(() -> {

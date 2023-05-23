@@ -1,6 +1,6 @@
 package com.my.lfy.api.thread;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import cn.hutool.core.thread.NamedThreadFactory;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,7 +30,7 @@ public class Test002 {
     public static void main(String[] args) {
 
         ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 50, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>()
-                , new ThreadFactoryBuilder().setNameFormat("线程通信测试--%d").build());
+                , new NamedThreadFactory("线程通信测试--", false));
 
         log.info("线程池的大小=====>{}.", executor.getPoolSize());
         log.info("线程池核心线程数=====>{}.", executor.getCorePoolSize());
@@ -43,14 +43,14 @@ public class Test002 {
             executor.execute(new PutAgg(basket));
             executor.execute(new GetEgg(basket));
 
-            executor.execute(()->{
+            executor.execute(() -> {
                 for (int j = 0; j < 100; j++) {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    log.info("j=========>{}.",j);
+                    log.info("j=========>{}.", j);
                 }
             });
 

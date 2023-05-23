@@ -1,7 +1,6 @@
 package com.my.lfy.utils;
 
-import cn.hutool.core.util.PinyinUtil;
-import com.my.lfy.utils.MyPinYinUtils;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
@@ -30,9 +29,9 @@ public class ListUtils {
         System.out.println(retrieve(source));
 
         System.out.println(PinyinUtil.getFirstLetter('张'));
-        System.out.println(PinyinUtil.getAllFirstLetter("中国"));
+        System.out.println(PinyinUtil.getFirstLetter("中国",""));
         System.out.println(MyPinYinUtils.getFirstLetter("中国"));
-        System.out.println(PinyinUtil.getPinYin("中国"));
+        System.out.println(PinyinUtil.getPinyin("中国"));
 
 
     }
@@ -74,7 +73,6 @@ public class ListUtils {
                 temp.add(e);
             }
         });
-
         return target;
     }
 }

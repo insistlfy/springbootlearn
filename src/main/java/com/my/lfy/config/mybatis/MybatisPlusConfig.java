@@ -9,14 +9,12 @@ import org.springframework.context.annotation.Configuration;
  * @Description: 配置分页插件
  * @Author: LFY
  * @Created: 2021/9/2 16:22
- * @Versions: V3.0
- * @Company: ©2021东方微银科技（西安）有限公司
  */
 @Configuration
 public class MybatisPlusConfig {
 
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
+    public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
 }

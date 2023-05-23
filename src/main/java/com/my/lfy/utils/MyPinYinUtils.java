@@ -1,6 +1,6 @@
 package com.my.lfy.utils;
 
-import cn.hutool.core.util.PinyinUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -9,13 +9,13 @@ import org.apache.commons.lang3.StringUtils;
  * @author lfy
  * @date 2020/7/20
  **/
-public class MyPinYinUtils extends PinyinUtil {
+public final class MyPinYinUtils extends PinyinUtil {
 
     public static String getFirstLetter(String chinese) {
 
         if (StringUtils.isBlank(chinese)) {
             return "";
         }
-        return String.valueOf(PinyinUtil.getAllFirstLetter(chinese).toCharArray()[0]);
+        return PinyinUtil.getFirstLetter(chinese, "-").split("-")[0];
     }
 }

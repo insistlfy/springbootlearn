@@ -1,0 +1,55 @@
+# Tomcat
+server:
+  port: 8888
+  servlet:
+    context-path: /lfy
+
+# Netty
+netty:
+  port: 8899
+
+spring:
+  # db
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://10.1.28.174:3306/dev_cydb_mysql
+      username: dev_cydb_mysql
+      password: dev_cydb_mysql
+      initial-size: 10
+      min-idle: 5
+      max-active: 100
+      max-wait: 60000
+
+  # redis
+  redis:
+    database: 0
+    host: localhost
+    password: 123456
+
+  # quartz
+  quartz:
+    job-store-type: memory
+    scheduler-name: quartzScheduler
+
+  # spring-task
+  task:
+    test1: 0/5 * * * * ?
+    test2: 0/5 * * * * ?
+
+# mybatis
+mybatis:
+  mapper-locations: classpath*:mapper/*/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    vfs-impl: org.mybatis.spring.boot.autoconfigure.SpringBootVFS
+
+# pageHelper
+pagehelper:
+  reasonable: false
+
+

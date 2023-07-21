@@ -9,18 +9,20 @@ netty:
   port: 8899
 
 spring:
-  # db
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/test
-      username: test
-      password: test
-      initial-size: 10
-      min-idle: 5
-      max-active: 100
-      max-wait: 60000
+  application:
+    name: lfy-dev
+  profiles:
+    active: mysql,redis
+  cloud:
+    nacos:
+      config:
+        # nacos addr
+        server-addr: 127.0.0.1:8848
+        namespace: lfy
+        file-extension: yaml
+        refresh-enabled: true
+        enabled: true
+        group: DEFAULT_GROUP
 
   # redis
   redis:
@@ -55,5 +57,4 @@ mybatis-plus:
 # pageHelper
 pagehelper:
   reasonable: false
-
 

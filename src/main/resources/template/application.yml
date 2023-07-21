@@ -1,0 +1,60 @@
+## Tomcat
+#server:
+#  port: 8888
+#  servlet:
+#    context-path: /lfy
+#
+## Netty
+#netty:
+#  port: 8899
+#
+#spring:
+#  # db
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      #      url: jdbc:mysql://localhost:3306/test
+#      url: mpw:UysCi1ueaq0MZDp1bO9BZIV+8ZRgE0DXoHunGVs5nSsO+binMKZuGRLpoligfVo+
+#      username: mpw:Bk8hpqb3dhXhzT9+vxBP7g==
+#      password: mpw:Bk8hpqb3dhXhzT9+vxBP7g==
+#      initial-size: 10
+#      min-idle: 5
+#      max-active: 100
+#      max-wait: 60000
+#
+#  # redis
+#  redis:
+#    database: 0
+#    host: localhost
+#    password: 123456
+#
+#  # quartz
+#  quartz:
+#    job-store-type: memory
+#    scheduler-name: quartzScheduler
+#
+#  # spring-task
+#  task:
+#    test1: 0/5 * * * * ?
+#    test2: 0/5 * * * * ?
+#
+## mybatis
+#mybatis:
+#  mapper-locations: classpath*:mapper/*/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    map-underscore-to-camel-case: true
+#    cache-enabled: true
+#    lazy-loading-enabled: true
+#    vfs-impl: org.mybatis.spring.boot.autoconfigure.SpringBootVFS
+#
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#
+## pageHelper
+#pagehelper:
+#  reasonable: false
+#
+#

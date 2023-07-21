@@ -52,4 +52,10 @@ public class MyBatisController {
     public JsonResult test04(@RequestBody List<MybatisTest1Vo> mybatisTest1VoList) {
         return new JsonResult<>(myBatisService.test04(mybatisTest1VoList));
     }
+
+    @PostMapping("test05")
+    @ApiOperation("测试@RefreshScope动态刷新")
+    public JsonResult<String> test05() {
+        return new JsonResult<>(myBatisService.test005());
+    }
 }

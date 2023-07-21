@@ -7,6 +7,8 @@ import com.my.lfy.api.transaction.mapper.CommonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +23,11 @@ import java.util.Map;
  **/
 @Slf4j
 @Service
+@RefreshScope
 public class MyBatisService {
+
+    @Value("${test.way:test}")
+    private String way;
 
     @Autowired
     private CommonMapper commonMapper;
@@ -74,5 +80,9 @@ public class MyBatisService {
         List<Map<String, Object>> list3 = commonMapper.querySubject3(params);
         log.info("方案三>>>>>>行行比较:{}", list3);
         return list3;
+    }
+
+    public String test005() {
+        return way;
     }
 }

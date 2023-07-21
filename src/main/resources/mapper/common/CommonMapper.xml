@@ -62,4 +62,38 @@
         select * from PFM_PRODUCT where PRODUCT_CODE = #{productCode}
     </select>
 
+    <select id="querySubject1" resultType="java.util.Map">
+        select * from subject_info
+        <where>
+            university_code = #{universityCode}
+            and subject_code in
+            <foreach collection="subjectCodeList" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="querySubject2" resultType="java.util.Map">
+        select * from subject_info
+        where
+        <foreach collection="list" item="item" index="index" separator="OR">
+            (
+            university_code = #{item.universityCode} and subject_code in
+            <foreach collection="item.subjectCodeList" item="subjectCode" index="subIndex" open="(" separator=","
+                     close=")">
+                #{subjectCode}
+            </foreach>
+            )
+        </foreach>
+    </select>
+
+    <select id="querySubject3" resultType="java.util.Map">
+        select * from subject_info where (university_code,subject_code) in
+        (
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.universityCode},#{item.subjectCode})
+        </foreach>
+        )
+    </select>
+
 </mapper>

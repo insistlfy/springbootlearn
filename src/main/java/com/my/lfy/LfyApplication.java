@@ -35,6 +35,7 @@ public class LfyApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LfyApplication.class, args);
+        log.info("项目启动成功，swagger访问地址：http://{ip}:{port}/{项目名}/swagger-ui/index.html");
     }
 
 }

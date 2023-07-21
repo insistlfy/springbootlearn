@@ -1,5 +1,7 @@
 package com.my.lfy.api.transaction.mapper;
 
+import com.my.lfy.api.mybatis.model.MybatisTest1Vo;
+import com.my.lfy.api.mybatis.model.MybatisTest2Vo;
 import com.my.lfy.api.test.model.DicModel;
 import com.my.lfy.api.test.model.TestModel;
 import org.apache.ibatis.annotations.Mapper;
@@ -93,5 +95,12 @@ public interface CommonMapper {
     Cursor<DicModel> scan(@Param("limit") Integer limit);
 
 
-    Map<String,Object> test(@Param("productCode") String productCode);
+    Map<String, Object> test(@Param("productCode") String productCode);
+
+    List<Map<String, Object>> querySubject1(@Param("universityCode") String universityCode,
+                                            @Param("subjectCodeList") List<String> subjectCodeList);
+
+    List<Map<String, Object>> querySubject2(List<MybatisTest1Vo> mybatisTest1VoList);
+
+    List<Map<String, Object>> querySubject3(List<MybatisTest2Vo> params);
 }

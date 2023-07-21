@@ -14,9 +14,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://10.1.28.174:3306/dev_cydb_mysql
-      username: dev_cydb_mysql
-      password: dev_cydb_mysql
+      url: jdbc:mysql://localhost:3306/test
+      username: test
+      password: test
       initial-size: 10
       min-idle: 5
       max-active: 100
@@ -47,6 +47,10 @@ mybatis:
     cache-enabled: true
     lazy-loading-enabled: true
     vfs-impl: org.mybatis.spring.boot.autoconfigure.SpringBootVFS
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # pageHelper
 pagehelper:

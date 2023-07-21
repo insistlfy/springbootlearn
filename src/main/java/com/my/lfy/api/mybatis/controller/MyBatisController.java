@@ -1,13 +1,18 @@
 package com.my.lfy.api.mybatis.controller;
 
+import com.my.lfy.api.mybatis.model.MybatisTest1Vo;
 import com.my.lfy.api.mybatis.service.MyBatisService;
 import com.my.lfy.utils.JsonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * MyBatisController
@@ -40,5 +45,11 @@ public class MyBatisController {
     public JsonResult test03() {
         myBatisService.test03();
         return new JsonResult<>();
+    }
+
+    @PostMapping("test04")
+    @ApiOperation("测试-SQL92规范中的‘行行比较’")
+    public JsonResult test04(@RequestBody List<MybatisTest1Vo> mybatisTest1VoList) {
+        return new JsonResult<>(myBatisService.test04(mybatisTest1VoList));
     }
 }

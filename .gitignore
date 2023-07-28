@@ -8,6 +8,6 @@ target/
 dataSources
 .idea
 .idea/
-*test.java
-*/test/
+#*test.java
+#*/test/
 *.attach_pid*
